@@ -1,4 +1,4 @@
-package set.interfaces;
+package interfaces.controller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -9,6 +9,7 @@ package set.interfaces;
 
 
 import javafx.event.ActionEvent;
+import set.controller.ScreenController;
 import set.controller.ScreenController;
 
 /**

@@ -6,6 +6,7 @@
 package set.controller;
 
 
+import interfaces.controller.ControlledScreen;
 import java.util.HashMap;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -18,7 +19,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import set.interfaces.ControlledScreen;
 
 /**
  *

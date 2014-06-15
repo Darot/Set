@@ -6,7 +6,7 @@
 
 package set.controller;
 
-import set.interfaces.ControlledScreen;
+import interfaces.controller.ControlledScreen;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
