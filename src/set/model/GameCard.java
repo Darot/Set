@@ -31,7 +31,7 @@ public class GameCard implements Cards {
     }
 
     @Override
-    public boolean isScelected() {
+    public boolean isSelected() {
         return selected;
     }
 

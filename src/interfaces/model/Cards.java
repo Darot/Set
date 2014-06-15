@@ -12,7 +12,7 @@ package interfaces.model;
  */
 public interface Cards {
     
-    public boolean isScelected();
+    public boolean isSelected();
     
     public void setSelected(boolean selected);
     
