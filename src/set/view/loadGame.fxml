@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="set.controller.LoadGameController">
+   <children>
+      <Button layoutX="11.0" layoutY="552.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
+      <Button layoutX="665.0" layoutY="551.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
+   </children>
+</AnchorPane>

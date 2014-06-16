@@ -9,7 +9,6 @@ package set.controller;
 import interfaces.controller.ControlledScreen;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import set.Set;
 
@@ -18,13 +17,14 @@ import set.Set;
  *
  * @author zeus
  */
-public class MainController implements Initializable, ControlledScreen {
+public class LoadGameController implements Initializable, ControlledScreen {
     
     ScreenController controller;
     
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -32,12 +32,17 @@ public class MainController implements Initializable, ControlledScreen {
 
     @Override
     public void setScreenParent(ScreenController screenParent) {
-            controller = screenParent;
+        controller = screenParent;
     }
 
-    @Override
-    public void goToMain(ActionEvent event) {
+    public void goToMain(){
+        //System.out.println(controller.getScreen("main"));
         controller.setScreen(Set.MAIN_MENU);
+    }
+    
+    @Override
+    public void exitGame() {
+        System.out.println("not implemented yet!");
     }
     
 }

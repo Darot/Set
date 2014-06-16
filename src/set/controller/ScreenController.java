@@ -32,8 +32,8 @@ public class ScreenController extends StackPane {
         screens.put(name, screen);
     }
     
-    public Node getScreen(int key){
-        return screens.get(key);
+    public Object getScreen(String name){
+        return screens.get(name);
     }
 
     public boolean loadScreen(String name, String resource) {

@@ -20,20 +20,34 @@ import javafx.stage.Stage;
  */
 public class Set extends Application {
     
+    //View Configuration
     public static final String PATH_PREFIX ="/set/view/";
-    public static final String MAIN_SCREEN = "main";
-    public static final String MAIN_SCREEN_FXML = PATH_PREFIX + "main.fxml";
-    public static final String MAIN_MENU =  "main_menu";
+    
+    public static final String SPLASH_SCREEN = "splash";
+    public static final String SPLASH_SCREEN_FXML = PATH_PREFIX + "splash.fxml";
+    public static final String MAIN_MENU =  "main";
     public static final String MAIN_MENU_FXML = PATH_PREFIX + "mainMenu.fxml";
+    public static final String CONFIGURATION_MENU =  "configuationMenu";
+    public static final String CONFIGURATION_MENU_FXML = PATH_PREFIX + "configurationMenu.fxml";
+    public static final String LOAD_GAME = "loadGame";
+    public static final String LOAD_GAME_FXML = PATH_PREFIX + "loadGame.fxml";
+    public static final String GAME = "game";
+    public static final String GAME_FXML = PATH_PREFIX + "game.fxml";
+    public static final String WINNER = "winner";
+    public static final String WINNER_FXML = PATH_PREFIX + "winner.fxml";
     
     @Override
     public void start(Stage primaryStage) throws Exception {
         
         ScreenController mainContainer = new ScreenController();
-        mainContainer.loadScreen(Set.MAIN_SCREEN, Set.MAIN_SCREEN_FXML);
+        mainContainer.loadScreen(Set.SPLASH_SCREEN, Set.SPLASH_SCREEN_FXML);
         mainContainer.loadScreen(Set.MAIN_MENU, Set.MAIN_MENU_FXML);
+        mainContainer.loadScreen(Set.CONFIGURATION_MENU, Set.CONFIGURATION_MENU_FXML);
+        mainContainer.loadScreen(Set.LOAD_GAME, Set.LOAD_GAME_FXML);
+        mainContainer.loadScreen(Set.GAME, Set.GAME_FXML);
+        mainContainer.loadScreen(Set.WINNER, Set.WINNER_FXML);
         
-        mainContainer.setScreen(Set.MAIN_SCREEN);
+        mainContainer.setScreen(Set.SPLASH_SCREEN);
         
         Group root = new Group();
         root.getChildren().addAll(mainContainer);

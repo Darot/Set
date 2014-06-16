@@ -17,10 +17,11 @@ import set.controller.ScreenController;
  * @author zeus
  */
 public interface ControlledScreen {
-    
+   
     //this method will allow the injection of the Parent ScreenPane
     public void setScreenParent(ScreenController screenParent);
     
-    public void goToMain(ActionEvent event);
+    public void exitGame();
+    
     
 }
