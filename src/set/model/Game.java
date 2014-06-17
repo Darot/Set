@@ -39,7 +39,7 @@ public class Game {
             for (int k = 0; k <= colours.length - 1; k++) { // 3 loops for colours
                 for (int j = 0; j <= 2; j++) { //3 loops for shadings
                     for (int l = 0; l <= 2; l++) {//3 loops for numbers
-                        card = new GameCard(colours[k], shadings[j], symbols[i], l);
+                        card = new GameCard(colours[k], shadings[j], symbols[i], l+1);
                         cards[cardNr] = card;
                         cardNr++;
                     }

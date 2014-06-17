@@ -43,7 +43,7 @@ public class GameController implements Initializable, ControlledScreen {
     private ImageView card15;
     private ImageView card16;
     
-    
+    private Game game;
     
     ScreenController controller;
     /**
@@ -55,16 +55,18 @@ public class GameController implements Initializable, ControlledScreen {
     }    
     
     public void initGame(ActionEvent event){
-        String imgPath = "/";
+        String imgPath;
         //Image image1 = new Image(Set.class.getResourceAsStream("/resources/cards/blue-solid-rectangle-3.jpg"));
         //card1.setImage(image1);
-        Game game = new Game();
+        imgPath = game.pickCard().getImagePath();
+        Image i1 = new Image(Set.class.getResourceAsStream(imgPath));
+        card1.setImage(i1);
+    }
+    
+    public GameController(){
+        game = new Game();
         game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
         game.shuffleCards();
-        imgPath = game.pickCard().getImagePath();
-        System.out.println(imgPath);
-        Image i1 = new Image(Set.class.getResourceAsStream(imgPath));
-        //card1.setImage(i1);
     }
 
     public void goToMain(ActionEvent event){
