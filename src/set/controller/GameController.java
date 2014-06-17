@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import set.Set;
+import set.model.Game;
+import set.model.GameCard;
 
 /**
  * FXML Controller class
@@ -25,6 +27,23 @@ public class GameController implements Initializable, ControlledScreen {
    
     @FXML
     private ImageView card1;
+    private ImageView card2;
+    private ImageView card3;
+    private ImageView card4;
+    private ImageView card5;
+    private ImageView card6;
+    private ImageView card7;
+    private ImageView card8;
+    private ImageView card9;
+    private ImageView card10;
+    private ImageView card11;
+    private ImageView card12;
+    private ImageView card13;
+    private ImageView card14;
+    private ImageView card15;
+    private ImageView card16;
+    
+    
     
     ScreenController controller;
     /**
@@ -36,10 +55,16 @@ public class GameController implements Initializable, ControlledScreen {
     }    
     
     public void initGame(ActionEvent event){
-        //final ImageView card1 = new ImageView();
-        Image image1 = new Image(Set.class.getResourceAsStream("/resources/cards/blue-solid-rectangle-3.jpg"));
-        //image1.isError();
-        card1.setImage(image1);
+        String imgPath = "/";
+        //Image image1 = new Image(Set.class.getResourceAsStream("/resources/cards/blue-solid-rectangle-3.jpg"));
+        //card1.setImage(image1);
+        Game game = new Game();
+        game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
+        game.shuffleCards();
+        imgPath = game.pickCard().getImagePath();
+        System.out.println(imgPath);
+        Image i1 = new Image(Set.class.getResourceAsStream(imgPath));
+        //card1.setImage(i1);
     }
 
     public void goToMain(ActionEvent event){

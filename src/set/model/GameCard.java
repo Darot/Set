@@ -78,4 +78,11 @@ public class GameCard implements Cards {
         }
     }
 
+    @Override
+    public String getImagePath() {
+        String path = "/resource/cards/" + colour + "-" + padding + "-" + symbol + "-" + number + ".jpg";
+        System.out.println(path);
+        return path;
+    }
+
 }
