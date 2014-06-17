@@ -16,18 +16,20 @@ public class GameCard implements Cards {
 
     //Konstants
     public static final String[] colours = {"red", "green", "blue"};
-    public static final String[] paddings = {"filled", "empty", "striped"};
-    public static final String[] symbols = {"star", "square", "diamond"};
+    public static final String[] paddings = {"open", "solid", "striped"};
+    public static final String[] symbols = {"oval", "rectangle", "wave"};
 
     private boolean selected = false;
     private String colour = null;
     private String padding = null;
     private String symbol = null;
+    private int number = 0;
 
-    public GameCard(String colour, String padding, String symbol) {
+    public GameCard(String colour, String padding, String symbol, int number) {
         this.colour = colour;
         this.padding = padding;
         this.symbol = symbol;
+        this.number = number;
     }
 
     @Override

@@ -10,3 +10,24 @@
     //background-image: url(/resources/bg-green-table.jpg);
 }
 
+.player1 {
+    -fx-text-fill: red;
+    -fx-font-size: 33px;
+    
+}
+
+.player2{
+    -fx-text-fill: blue;
+    -fx-font-size: 33px;
+}
+
+.player3{
+    -fx-text-fill: green;
+    -fx-font-size: 33px;
+}
+
+.player4{
+    -fx-text-fill: yellow;
+    -fx-font-size: 33px;
+}
+
