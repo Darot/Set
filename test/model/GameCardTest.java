@@ -21,7 +21,7 @@ public class GameCardTest {
 
     @Before
     public void setUp() {
-        card = new GameCard("red", "stripped", "diamond");
+        card = new GameCard("red", "striped", "wave", 1);
     }
 
     @Test
@@ -30,9 +30,9 @@ public class GameCardTest {
 
         assertEquals("Object Attribute should be set", card.getColour(), "red");
 
-        assertEquals("Object Attribute should be set", card.getPadding(), "stripped");
+        assertEquals("Object Attribute should be set", card.getPadding(), "striped");
 
-        assertEquals("Object Attribute should be set", card.getSymbol(), "diamond");
+        assertEquals("Object Attribute should be set", card.getSymbol(), "wave");
     }
 
     // TODO add test methods here.

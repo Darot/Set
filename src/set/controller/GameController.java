@@ -37,7 +37,7 @@ public class GameController implements Initializable, ControlledScreen {
     
     public void initGame(ActionEvent event){
         //final ImageView card1 = new ImageView();
-        Image image1 = new Image(Set.class.getResourceAsStream("/resources/cards/cards-icon.png"));
+        Image image1 = new Image(Set.class.getResourceAsStream("/resources/cards/blue-solid-rectangle-3.jpg"));
         //image1.isError();
         card1.setImage(image1);
     }
