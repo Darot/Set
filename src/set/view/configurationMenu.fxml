@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.ConfigurationMenuController">
+<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/default.css"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.ConfigurationMenuController">
    <children>
       <Button layoutX="655.0" layoutY="551.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
       <Button layoutX="20.0" layoutY="551.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />

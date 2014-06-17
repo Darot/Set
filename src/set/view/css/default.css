@@ -1,0 +1,12 @@
+/* 
+    Created on : Jun 16, 2014, 2:51:39 AM
+    Author     : Daniel Roth
+*/
+
+.background {
+    -fx-background-color: lightblue;
+    -fx-background-image: url("../img/bg3.jpg");
+    -fx-background-position: left bottom;
+    //background-image: url(/resources/bg-green-table.jpg);
+}
+

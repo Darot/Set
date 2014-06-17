@@ -30,7 +30,7 @@ public class ScreenControllerTest {
     
     @Test
     public void testMap(){
-        assertNull("Empty HashMap should exist", controller.getScreen(0));
+        assertNull("Empty HashMap should exist", controller.getScreen("main"));
     }
     
 }
