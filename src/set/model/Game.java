@@ -16,13 +16,24 @@ public class Game {
     private GameCard[] cards = new GameCard[81];
     private int cardCounter = 80;
     
-    
-    public GameCard[] getCards(){
+    public Player player1;
+    public Player player2;
+    public Player player3;
+    public Player player4;
+
+    public Game() {
+        player1 = new Player("Tobias");
+        player2 = new Player("Tobias");
+        player3 = new Player("Tobias");
+        player4 = new Player("Tobias");
+    }
+
+    public GameCard[] getCards() {
         return cards;
     }
-    
-    public GameCard pickCard(){
-        cardCounter --;
+
+    public GameCard pickCard() {
+        cardCounter--;
         return cards[cardCounter];
     }
 
@@ -39,7 +50,7 @@ public class Game {
             for (int k = 0; k <= colours.length - 1; k++) { // 3 loops for colours
                 for (int j = 0; j <= 2; j++) { //3 loops for shadings
                     for (int l = 0; l <= 2; l++) {//3 loops for numbers
-                        card = new GameCard(colours[k], shadings[j], symbols[i], l+1);
+                        card = new GameCard(colours[k], shadings[j], symbols[i], l + 1);
                         cards[cardNr] = card;
                         cardNr++;
                     }

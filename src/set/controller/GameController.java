@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import set.Set;
 import set.model.Game;
 import set.model.GameCard;
+import set.model.Player;
 
 /**
  * FXML Controller class
@@ -78,6 +79,9 @@ public class GameController implements Initializable, ControlledScreen {
 
     private GameCard[] cards;
     private ImageView[] cardPositions;
+    GameCard[] cardsSelected = new GameCard[3];
+    
+    private HashMap<String, Player> players = new HashMap<String, Player>();
 
     ScreenController controller;
 
@@ -91,26 +95,30 @@ public class GameController implements Initializable, ControlledScreen {
 
     public void setClicked(ActionEvent event) {
         Button btn = (Button) event.getSource();
-        String btnId = btn.getId();
-        System.out.println(btnId);
-//        System.out.println(event.getSource().equals(setPlayer2));
-//        if(event.getSource().equals(setPlayer2)){
-//            System.out.println("player2");
-//        }
+        String playerId = btn.getId();
+        System.out.println(playerId);
+        if(set == null){
+            set = playerId;
+            playerId = playerId.substring(9);
+            int Id = Integer.parseInt(playerId);
+            System.out.println(Id);
+        }
     }
 
     public void cardClicked(MouseEvent event) {
         ImageView card = (ImageView) event.getSource();
         String cardId = card.getId();
+        cardId = cardId.substring(4);
+        int Id = Integer.parseInt(cardId);
         System.out.println(cardId);
 //        String id = event.getSource().toString();
 //        id = id.substring(13, id.length() - 1);
 //        System.out.println(id);
-        if (set == null) {
-            System.out.println("Card clicked - CALL SET FIRST!");
-        } else {
-            //TODO
-        }
+//        if (set == null) {
+//            System.out.println("Card clicked - CALL SET FIRST!");
+//        } else {
+//            
+//        }
 
     }
 
@@ -149,6 +157,11 @@ public class GameController implements Initializable, ControlledScreen {
         }
 
         checkForSet();
+        
+        players.put("player1", game.player1);
+        players.put("player2", game.player2);
+        players.put("player3", game.player3);
+        players.put("player4", game.player4);
     }
 
     public boolean checkForSet() {
