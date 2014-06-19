@@ -28,6 +28,8 @@ public interface Cards {
     
     public void setSymbol(String Symbol);
     
+    public int getNumber();
+    
     public String getImagePath();
     
 }

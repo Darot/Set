@@ -119,7 +119,7 @@ public class GameController implements Initializable, ControlledScreen {
         Image img = null;
         cardPositions = new ImageView[16];
         cards = new GameCard[16];
-        
+
         cardPositions[0] = card1;
         cardPositions[1] = card2;
         cardPositions[2] = card3;
@@ -136,7 +136,7 @@ public class GameController implements Initializable, ControlledScreen {
         cardPositions[13] = card14;
         cardPositions[14] = card15;
         cardPositions[15] = card16;
-        
+
         for (int i = 0; i < 12; i++) {
             cards[i] = game.pickCard();
             System.out.println(cards[i]);
@@ -147,13 +147,48 @@ public class GameController implements Initializable, ControlledScreen {
             img = new Image(Set.class.getResourceAsStream(imgPath));
             cardPositions[i].setImage(img);
         }
-        
-        //String imgPath;
-        //Image image1 = new Image(Set.class.getResourceAsStream("/resources/cards/blue-solid-rectangle-3.jpg"));
-        //card1.setImage(image1);
-        //imgPath = game.pickCard().getImagePath();
-        //Image i1 = new Image(Set.class.getResourceAsStream(imgPath));
-        //card1.setImage(i1);
+
+        checkForSet();
+    }
+
+    public boolean checkForSet() {
+
+        for (int ai = 0; ai < cards.length; ai++) {
+            GameCard a = cards[ai];
+            for (int bi = ai + 1; bi < cards.length; bi++) {
+                GameCard b = cards[bi];
+                for (int ci = bi + 1; ci < cards.length; ci++) {
+                    GameCard c = cards[ci];
+                    if(a != null && b != null && c != null){
+                      if (isSet(a, b, c)) {
+                        return true;
+                        }   
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean isSet(GameCard c1, GameCard c2, GameCard c3){
+                if (!((c1.getNumber()) == c2.getNumber()) && (c2.getNumber() == c3.getNumber()) ||
+                (c1.getNumber() != c2.getNumber()) && (c1.getNumber() != c3.getNumber()) && (c2.getNumber() != c3.getNumber())) {
+            return false;
+        }
+        if (!((c1.getSymbol() == c2.getSymbol()) && (c2.getSymbol() == c3.getSymbol()) ||
+                (c1.getSymbol() != c2.getSymbol()) && (c1.getSymbol() != c3.getSymbol()) && (c2.getSymbol()!= c3.getSymbol()))) {
+            return false;
+        }
+        if (!((c1.getPadding() == c2.getPadding()) && (c2.getPadding() == c3.getPadding()) ||
+                (c1.getPadding() != c2.getPadding()) && (c1.getPadding() != c3.getPadding()) && (c2.getPadding() != c3.getPadding()))) {
+            return false;
+        }
+        if (!((c1.getColour() == c2.getColour())) && (c2.getColour() == c3.getColour()) ||
+                (c1.getColour() != c2.getColour()) && (c1.getColour() != c3.getColour()) && (c2.getColour() != c3.getColour())) {
+            return false;
+        }
+        System.out.println("Set detected!");
+        return true;
     }
 
     public GameController() {

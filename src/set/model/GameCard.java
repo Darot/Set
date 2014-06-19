@@ -85,4 +85,9 @@ public class GameCard implements Cards {
         return path;
     }
 
+    @Override
+    public int getNumber() {
+        return number;
+    }
+
 }
