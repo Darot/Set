@@ -8,7 +8,9 @@ package set.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -17,6 +19,11 @@ import javafx.fxml.Initializable;
  */
 public class WinnerController implements Initializable {
 
+    ScreenController controller;
+    
+    @FXML
+    Label winner;
+    
     /**
      * Initializes the controller class.
      */
@@ -24,5 +31,13 @@ public class WinnerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    public void setScreenParent(ScreenController screenParent) {
+        controller = screenParent;
+    }
+    
+    public void initData (String winners){
+       // winner.setText(winners);
+    }
     
 }

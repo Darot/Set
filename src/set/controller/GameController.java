@@ -15,12 +15,16 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import set.Set;
 import set.model.Game;
 import set.model.GameCard;
@@ -136,7 +140,7 @@ public class GameController implements Initializable, ControlledScreen {
         }
 
         checkForSet();
-        
+
         players[0] = game.player1;
         players[1] = game.player2;
         players[2] = game.player3;
@@ -164,54 +168,52 @@ public class GameController implements Initializable, ControlledScreen {
             int Id = Integer.parseInt(cardId);
             selectedCards[cardCounter] = Id;
             cardCounter++;
-        
 
-        if (cardCounter == 3) {
-            if (isSet(cards[selectedCards[0]], cards[selectedCards[1]], cards[selectedCards[2]]) == true) {
-                System.out.println("SET!");
-                addPoint(set);
-                removeUsedCards(selectedCards[0], selectedCards[1], selectedCards[2]);
-                addCards(3);
+            if (cardCounter == 3) {
+                if (isSet(cards[selectedCards[0]], cards[selectedCards[1]], cards[selectedCards[2]]) == true) {
+                    System.out.println("SET!");
+                    addPoint(set);
+                    removeUsedCards(selectedCards[0], selectedCards[1], selectedCards[2]);
+                    addCards(3);
+                }
+                cardCounter = 0;
+                set = -1;
+                Arrays.fill(selectedCards, -1);
             }
-            cardCounter = 0;
-            set = -1;
-            Arrays.fill(selectedCards, -1);
-        }
 
-        System.out.println(selectedCards[0]);
-        System.out.println(selectedCards[1]);
-        System.out.println(selectedCards[2]);
-        
-        }else {
+            System.out.println(selectedCards[0]);
+            System.out.println(selectedCards[1]);
+            System.out.println(selectedCards[2]);
+
+        } else {
             System.out.println("SET has to be klicked first!");
         }
     }
-    
-    public void removeUsedCards(int pos1, int pos2, int pos3){
+
+    public void removeUsedCards(int pos1, int pos2, int pos3) {
         cards[pos1] = null;
         cards[pos2] = null;
         cards[pos3] = null;
     }
-    
-    public void addCards(int amount){
+
+    public void addCards(int amount) {
         String imgPath;
         Image img;
-        for(int i = 0; amount > 0; i++){
-            if(cards[i] == null){
+        for (int i = 0; amount > 0; i++) {
+            if (cards[i] == null) {
                 cards[i] = game.pickCard();
                 imgPath = cards[i].getImagePath();
                 img = new Image(Set.class.getResourceAsStream(imgPath));
                 cardPositions[i].setImage(img);
-                amount --;
+                amount--;
             }
         }
     }
-    
-    
-    public void addPoint(int playerId){
+
+    public void addPoint(int playerId) {
         System.out.println(playerId);
         players[playerId].addPoint();
-        Label label = (Label)  controller.lookup("#player" + playerId + "Points");
+        Label label = (Label) controller.lookup("#player" + playerId + "Points");
         label.setText("" + players[playerId].getPoints());
     }
 
@@ -235,7 +237,7 @@ public class GameController implements Initializable, ControlledScreen {
     }
 
     public boolean isSet(GameCard c1, GameCard c2, GameCard c3) {
-        
+
         if (!((c1.getNumber() == c2.getNumber()) && (c2.getNumber() == c3.getNumber())
                 || (c1.getNumber() != c2.getNumber()) && (c1.getNumber() != c3.getNumber()) && (c2.getNumber() != c3.getNumber()))) {
             return false;
@@ -259,9 +261,22 @@ public class GameController implements Initializable, ControlledScreen {
     public void goToMain(ActionEvent event) {
         controller.setScreen(Set.MAIN_MENU);
     }
-    
-    public void gameEnd(){
-        controller.setScreen(Set.WINNER);
+
+    public void gameEnd() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Set.WINNER_FXML));
+
+        Stage stage = new Stage();
+        stage.setScene(
+                new Scene(
+                        (Pane) loader.load()
+                )
+        );
+
+        WinnerController winController = loader.<WinnerController>getController();
+        //controller.setScreen(Set.WINNER);
+        
+        stage.show();
+        winController.initData("Holland!");
     }
 
     @Override

@@ -12,7 +12,7 @@
 <AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.GameController">
    <children>
       <Button layoutX="15.0" layoutY="974.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
-      <Button layoutX="1139.0" layoutY="973.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
+      <Button layoutX="1139.0" layoutY="973.0" mnemonicParsing="false" onAction="#gameEnd" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
       <Button fx:id="start" layoutX="624.0" layoutY="912.0" mnemonicParsing="false" onAction="#initGame" text="Start" />
       <ImageView id="card14" fx:id="card15" fitHeight="178.0" fitWidth="148.0" layoutX="655.0" layoutY="679.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
