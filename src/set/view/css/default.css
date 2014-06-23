@@ -31,3 +31,11 @@
     -fx-font-size: 33px;
 }
 
+.image{
+    -fx-background-radius: 30;
+-fx-background-color: red;
+-fx-border-radius: 30;
+-fx-border-width:5;
+-fx-border-color:blue;
+}
+

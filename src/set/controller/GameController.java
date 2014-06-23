@@ -8,6 +8,7 @@ package set.controller;
 import interfaces.controller.ControlledScreen;
 import static java.lang.Thread.sleep;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -79,8 +80,9 @@ public class GameController implements Initializable, ControlledScreen {
 
     private GameCard[] cards;
     private ImageView[] cardPositions;
-    GameCard[] cardsSelected = new GameCard[3];
-    
+    private GameCard[] selectedCards = new GameCard[3];
+    private int cardCounter = 0;
+
     private HashMap<String, Player> players = new HashMap<String, Player>();
 
     ScreenController controller;
@@ -93,33 +95,10 @@ public class GameController implements Initializable, ControlledScreen {
         // TODO
     }
 
-    public void setClicked(ActionEvent event) {
-        Button btn = (Button) event.getSource();
-        String playerId = btn.getId();
-        System.out.println(playerId);
-        if(set == null){
-            set = playerId;
-            playerId = playerId.substring(9);
-            int Id = Integer.parseInt(playerId);
-            System.out.println(Id);
-        }
-    }
-
-    public void cardClicked(MouseEvent event) {
-        ImageView card = (ImageView) event.getSource();
-        String cardId = card.getId();
-        cardId = cardId.substring(4);
-        int Id = Integer.parseInt(cardId);
-        System.out.println(cardId);
-//        String id = event.getSource().toString();
-//        id = id.substring(13, id.length() - 1);
-//        System.out.println(id);
-//        if (set == null) {
-//            System.out.println("Card clicked - CALL SET FIRST!");
-//        } else {
-//            
-//        }
-
+    public GameController() {
+        game = new Game();
+        game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
+        game.shuffleCards();
     }
 
     public void initGame(ActionEvent event) {
@@ -157,11 +136,56 @@ public class GameController implements Initializable, ControlledScreen {
         }
 
         checkForSet();
-        
+
         players.put("player1", game.player1);
         players.put("player2", game.player2);
         players.put("player3", game.player3);
         players.put("player4", game.player4);
+    }
+
+    public void setClicked(ActionEvent event) {
+        Button btn = (Button) event.getSource();
+        String playerId = btn.getId();
+        System.out.println(playerId);
+        if (set == null) {
+            set = playerId;
+            playerId = playerId.substring(9);
+            int Id = Integer.parseInt(playerId);
+            System.out.println(Id);
+        }
+    }
+
+    public void cardClicked(MouseEvent event) {
+
+        if (set != null) {
+            ImageView card = (ImageView) event.getSource();
+            String cardId = card.getId();
+            cardId = cardId.substring(4);
+            int Id = Integer.parseInt(cardId);
+            selectedCards[cardCounter] = cards[Id];
+            cardCounter++;
+        }
+
+        if (cardCounter == 3) {
+            if (isSet(selectedCards[0], selectedCards[1], selectedCards[2]) == true) {
+                System.out.println("SET!");
+            }
+            cardCounter = 0;
+            Arrays.fill(selectedCards, null);
+        }
+
+        System.out.println(selectedCards[0]);
+        System.out.println(selectedCards[1]);
+        System.out.println(selectedCards[2]);
+
+//        String id = event.getSource().toString();
+//        id = id.substring(13, id.length() - 1);
+//        System.out.println(id);
+//        if (set == null) {
+//            System.out.println("Card clicked - CALL SET FIRST!");
+//        } else {
+//            
+//        }
     }
 
     public boolean checkForSet() {
@@ -172,42 +196,37 @@ public class GameController implements Initializable, ControlledScreen {
                 GameCard b = cards[bi];
                 for (int ci = bi + 1; ci < cards.length; ci++) {
                     GameCard c = cards[ci];
-                    if(a != null && b != null && c != null){
-                      if (isSet(a, b, c)) {
-                        return true;
-                        }   
+                    if (a != null && b != null && c != null) {
+                        if (isSet(a, b, c)) {
+                            return true;
+                        }
                     }
                 }
             }
         }
         return false;
     }
-    
-    public boolean isSet(GameCard c1, GameCard c2, GameCard c3){
-                if (!((c1.getNumber()) == c2.getNumber()) && (c2.getNumber() == c3.getNumber()) ||
-                (c1.getNumber() != c2.getNumber()) && (c1.getNumber() != c3.getNumber()) && (c2.getNumber() != c3.getNumber())) {
+
+    public boolean isSet(GameCard c1, GameCard c2, GameCard c3) {
+        
+        if (!((c1.getNumber() == c2.getNumber()) && (c2.getNumber() == c3.getNumber())
+                || (c1.getNumber() != c2.getNumber()) && (c1.getNumber() != c3.getNumber()) && (c2.getNumber() != c3.getNumber()))) {
             return false;
         }
-        if (!((c1.getSymbol() == c2.getSymbol()) && (c2.getSymbol() == c3.getSymbol()) ||
-                (c1.getSymbol() != c2.getSymbol()) && (c1.getSymbol() != c3.getSymbol()) && (c2.getSymbol()!= c3.getSymbol()))) {
+        if (!((c1.getSymbol() == c2.getSymbol()) && (c2.getSymbol() == c3.getSymbol())
+                || (c1.getSymbol() != c2.getSymbol()) && (c1.getSymbol() != c3.getSymbol()) && (c2.getSymbol() != c3.getSymbol()))) {
             return false;
         }
-        if (!((c1.getPadding() == c2.getPadding()) && (c2.getPadding() == c3.getPadding()) ||
-                (c1.getPadding() != c2.getPadding()) && (c1.getPadding() != c3.getPadding()) && (c2.getPadding() != c3.getPadding()))) {
+        if (!((c1.getPadding() == c2.getPadding()) && (c2.getPadding() == c3.getPadding())
+                || (c1.getPadding() != c2.getPadding()) && (c1.getPadding() != c3.getPadding()) && (c2.getPadding() != c3.getPadding()))) {
             return false;
         }
-        if (!((c1.getColour() == c2.getColour())) && (c2.getColour() == c3.getColour()) ||
-                (c1.getColour() != c2.getColour()) && (c1.getColour() != c3.getColour()) && (c2.getColour() != c3.getColour())) {
+        if (!((c1.getColour() == c2.getColour()) && (c2.getColour() == c3.getColour())
+                || (c1.getColour() != c2.getColour()) && (c1.getColour() != c3.getColour()) && (c2.getColour() != c3.getColour()))) {
             return false;
         }
         System.out.println("Set detected!");
         return true;
-    }
-
-    public GameController() {
-        game = new Game();
-        game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
-        game.shuffleCards();
     }
 
     public void goToMain(ActionEvent event) {
