@@ -81,7 +81,7 @@ public class GameController implements Initializable, ControlledScreen {
 
     private GameCard[] cards;
     private ImageView[] cardPositions;
-    private GameCard[] selectedCards = new GameCard[3];
+    private int[] selectedCards = new int[3];
     private int cardCounter = 0;
     private Player players[] = new Player[4];
 
@@ -162,18 +162,20 @@ public class GameController implements Initializable, ControlledScreen {
             String cardId = card.getId();
             cardId = cardId.substring(4);
             int Id = Integer.parseInt(cardId);
-            selectedCards[cardCounter] = cards[Id];
+            selectedCards[cardCounter] = Id;
             cardCounter++;
         
 
         if (cardCounter == 3) {
-            if (isSet(selectedCards[0], selectedCards[1], selectedCards[2]) == true) {
+            if (isSet(cards[selectedCards[0]], cards[selectedCards[1]], cards[selectedCards[2]]) == true) {
                 System.out.println("SET!");
                 addPoint(set);
+                removeUsedCards(selectedCards[0], selectedCards[1], selectedCards[2]);
+                addCards(3);
             }
             cardCounter = 0;
-            Arrays.fill(selectedCards, null);
             set = -1;
+            Arrays.fill(selectedCards, -1);
         }
 
         System.out.println(selectedCards[0]);
@@ -185,9 +187,26 @@ public class GameController implements Initializable, ControlledScreen {
         }
     }
     
-    public void removeUsedCards(GameCard c1, GameCard c2, GameCard c3){
-        
+    public void removeUsedCards(int pos1, int pos2, int pos3){
+        cards[pos1] = null;
+        cards[pos2] = null;
+        cards[pos3] = null;
     }
+    
+    public void addCards(int amount){
+        String imgPath;
+        Image img;
+        for(int i = 0; amount > 0; i++){
+            if(cards[i] == null){
+                cards[i] = game.pickCard();
+                imgPath = cards[i].getImagePath();
+                img = new Image(Set.class.getResourceAsStream(imgPath));
+                cardPositions[i].setImage(img);
+                amount --;
+            }
+        }
+    }
+    
     
     public void addPoint(int playerId){
         System.out.println(playerId);
@@ -239,6 +258,10 @@ public class GameController implements Initializable, ControlledScreen {
 
     public void goToMain(ActionEvent event) {
         controller.setScreen(Set.MAIN_MENU);
+    }
+    
+    public void gameEnd(){
+        controller.setScreen(Set.WINNER);
     }
 
     @Override
