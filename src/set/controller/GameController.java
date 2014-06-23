@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -76,14 +77,13 @@ public class GameController implements Initializable, ControlledScreen {
 
     private Game game;
 
-    private String set = null;
+    private int set = -1;
 
     private GameCard[] cards;
     private ImageView[] cardPositions;
     private GameCard[] selectedCards = new GameCard[3];
     private int cardCounter = 0;
-
-    private HashMap<String, Player> players = new HashMap<String, Player>();
+    private Player players[] = new Player[4];
 
     ScreenController controller;
 
@@ -136,56 +136,64 @@ public class GameController implements Initializable, ControlledScreen {
         }
 
         checkForSet();
-
-        players.put("player1", game.player1);
-        players.put("player2", game.player2);
-        players.put("player3", game.player3);
-        players.put("player4", game.player4);
+        
+        players[0] = game.player1;
+        players[1] = game.player2;
+        players[2] = game.player3;
+        players[3] = game.player4;
     }
 
     public void setClicked(ActionEvent event) {
         Button btn = (Button) event.getSource();
         String playerId = btn.getId();
         System.out.println(playerId);
-        if (set == null) {
-            set = playerId;
+        if (set == -1) {
             playerId = playerId.substring(9);
             int Id = Integer.parseInt(playerId);
             System.out.println(Id);
+            set = Id;
         }
     }
 
     public void cardClicked(MouseEvent event) {
 
-        if (set != null) {
+        if (set != -1) {
             ImageView card = (ImageView) event.getSource();
             String cardId = card.getId();
             cardId = cardId.substring(4);
             int Id = Integer.parseInt(cardId);
             selectedCards[cardCounter] = cards[Id];
             cardCounter++;
-        }
+        
 
         if (cardCounter == 3) {
             if (isSet(selectedCards[0], selectedCards[1], selectedCards[2]) == true) {
                 System.out.println("SET!");
+                addPoint(set);
             }
             cardCounter = 0;
             Arrays.fill(selectedCards, null);
+            set = -1;
         }
 
         System.out.println(selectedCards[0]);
         System.out.println(selectedCards[1]);
         System.out.println(selectedCards[2]);
-
-//        String id = event.getSource().toString();
-//        id = id.substring(13, id.length() - 1);
-//        System.out.println(id);
-//        if (set == null) {
-//            System.out.println("Card clicked - CALL SET FIRST!");
-//        } else {
-//            
-//        }
+        
+        }else {
+            System.out.println("SET has to be klicked first!");
+        }
+    }
+    
+    public void removeUsedCards(GameCard c1, GameCard c2, GameCard c3){
+        
+    }
+    
+    public void addPoint(int playerId){
+        System.out.println(playerId);
+        players[playerId].addPoint();
+        Label label = (Label)  controller.lookup("#player" + playerId + "Points");
+        label.setText("" + players[playerId].getPoints());
     }
 
     public boolean checkForSet() {
