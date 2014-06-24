@@ -46,6 +46,7 @@ public class ScreenController extends StackPane {
             addScreen(name, loadScreen);
             return true;
         } catch (Exception e) {
+            System.out.println("error!");
             System.out.println(e.getMessage());
             return false;
         }
@@ -86,6 +87,7 @@ public class ScreenController extends StackPane {
             return true;
         } else {
             System.out.println("screen hasn't been loaded!!! \n");
+            System.out.println(screens.get("configuration"));
             return false;
         }
     }

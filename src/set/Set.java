@@ -27,7 +27,7 @@ public class Set extends Application {
     public static final String SPLASH_SCREEN_FXML = PATH_PREFIX + "splash.fxml";
     public static final String MAIN_MENU =  "main";
     public static final String MAIN_MENU_FXML = PATH_PREFIX + "mainMenu.fxml";
-    public static final String CONFIGURATION_MENU =  "configuationMenu";
+    public static final String CONFIGURATION_MENU =  "configuration";
     public static final String CONFIGURATION_MENU_FXML = PATH_PREFIX + "configurationMenu.fxml";
     public static final String LOAD_GAME = "loadGame";
     public static final String LOAD_GAME_FXML = PATH_PREFIX + "loadGame.fxml";
@@ -45,7 +45,6 @@ public class Set extends Application {
         mainContainer.loadScreen(Set.CONFIGURATION_MENU, Set.CONFIGURATION_MENU_FXML);
         mainContainer.loadScreen(Set.LOAD_GAME, Set.LOAD_GAME_FXML);
         mainContainer.loadScreen(Set.GAME, Set.GAME_FXML);
-        mainContainer.loadScreen(Set.WINNER, Set.WINNER_FXML);
         
         mainContainer.setScreen(Set.SPLASH_SCREEN);
         
