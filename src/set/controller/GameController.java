@@ -24,11 +24,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import set.Set;
 import set.model.Game;
 import set.model.GameCard;
 import set.model.Player;
+import set.model.SoundPlayer;
 
 /**
  * FXML Controller class
@@ -90,6 +92,7 @@ public class GameController implements Initializable, ControlledScreen {
     private Player players[] = new Player[4];
 
     ScreenController controller;
+    SoundPlayer soundPlayer = new SoundPlayer();
 
     /**
      * Initializes the controller class.
@@ -145,16 +148,17 @@ public class GameController implements Initializable, ControlledScreen {
         players[1] = game.player2;
         players[2] = game.player3;
         players[3] = game.player4;
+        
+        soundPlayer.playCardSound();
     }
 
     public void setClicked(ActionEvent event) {
         Button btn = (Button) event.getSource();
         String playerId = btn.getId();
-        System.out.println(playerId);
+   
         if (set == -1) {
             playerId = playerId.substring(9);
             int Id = Integer.parseInt(playerId);
-            System.out.println(Id);
             set = Id;
         }
     }
@@ -171,19 +175,17 @@ public class GameController implements Initializable, ControlledScreen {
 
             if (cardCounter == 3) {
                 if (isSet(cards[selectedCards[0]], cards[selectedCards[1]], cards[selectedCards[2]]) == true) {
-                    System.out.println("SET!");
                     addPoint(set);
+                    soundPlayer.playPointSound();
                     removeUsedCards(selectedCards[0], selectedCards[1], selectedCards[2]);
                     addCards(3);
+                }else{
+                    soundPlayer.playFailSound();
                 }
                 cardCounter = 0;
                 set = -1;
                 Arrays.fill(selectedCards, -1);
             }
-
-            System.out.println(selectedCards[0]);
-            System.out.println(selectedCards[1]);
-            System.out.println(selectedCards[2]);
 
         } else {
             System.out.println("SET has to be klicked first!");
@@ -209,9 +211,8 @@ public class GameController implements Initializable, ControlledScreen {
             }
         }
     }
-
+    
     public void addPoint(int playerId) {
-        System.out.println(playerId);
         players[playerId].addPoint();
         Label label = (Label) controller.lookup("#player" + playerId + "Points");
         label.setText("" + players[playerId].getPoints());
