@@ -56,6 +56,7 @@ public class Set extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
 
     /**
      * @param args the command line arguments

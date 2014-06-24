@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import set.model.SoundPlayer;
 
 /**
  * FXML Controller class
@@ -30,14 +31,21 @@ public class WinnerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
     
     public void setScreenParent(ScreenController screenParent) {
         controller = screenParent;
     }
     
-    public void initData (String winners){
-       // winner.setText(winners);
+    public void initData (String[] winners){
+       String winnerText = "";
+        for(int i = 0; i < winners.length; i++){
+           if(winners[i] != null){
+               winnerText = winnerText + winners[i] + "\n";
+           }
+        }
+        winner.setText(winnerText);
+        
     }
     
 }

@@ -80,6 +80,8 @@ public class GameController implements Initializable, ControlledScreen {
     private Button setPlayer3;
     @FXML
     private Button setPlayer4;
+    @FXML
+    private Button start;
 
     private Game game;
 
@@ -149,6 +151,7 @@ public class GameController implements Initializable, ControlledScreen {
         players[2] = game.player3;
         players[3] = game.player4;
         
+        start.setDisable(true);
         soundPlayer.playCardSound();
     }
 
@@ -264,6 +267,25 @@ public class GameController implements Initializable, ControlledScreen {
     }
 
     public void gameEnd() throws Exception {
+        //Find winner
+        String[] winners = new String[4];
+        int wCount = 0;
+        int max = 0;
+        for(int i = 0; i <=3; i++){
+            if(players[i].getPoints() > max){
+                winners[0] = players[i].getName();
+                max = players[i].getPoints();
+                wCount = 1;
+                winners[1] = null;
+                winners[2] = null;
+                winners[3] = null;
+            }
+            if(players[i].getPoints() == max){
+                winners[wCount] = players[i].getName();
+                wCount ++;
+            }
+        }
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Set.WINNER_FXML));
 
         Stage stage = new Stage();
@@ -277,7 +299,12 @@ public class GameController implements Initializable, ControlledScreen {
         //controller.setScreen(Set.WINNER);
         
         stage.show();
-        winController.initData("Holland!");
+        winController.initData(winners);
+        soundPlayer.playApplouseSound();
+        
+        controller.setScreen(Set.MAIN_MENU);
+        controller.unloadScreen(Set.GAME);
+        controller.loadScreen(Set.GAME, Set.GAME_FXML);
     }
 
     @Override
