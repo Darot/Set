@@ -39,6 +39,9 @@ import set.model.SoundPlayer;
  */
 public class GameController implements Initializable, ControlledScreen {
 
+    /*
+    Inject JavaFX Frontend Objects for later manipulation
+    */
     @FXML
     private ImageView card1;
     @FXML
@@ -83,7 +86,7 @@ public class GameController implements Initializable, ControlledScreen {
     
     @FXML
     private Button start;
-    @FXML
+    @FXML 
     private Label cardCount;
 
     private Game game;
@@ -92,8 +95,8 @@ public class GameController implements Initializable, ControlledScreen {
 
     private GameCard[] cards;
     private ImageView[] cardPositions;
-    private int[] selectedCards = new int[3];
-    private int cardCounter = 0;
+    private int[] selectedCards = new int[3]; //selected cards for a SET
+    private int cardCounter = 0; //Card counter for set selection
     private Player players[] = new Player[4];
 
     ScreenController controller;
@@ -113,12 +116,18 @@ public class GameController implements Initializable, ControlledScreen {
         game.shuffleCards();
     }
 
+    /**
+     *      EVENTHANDLER
+     */
+    
+    //Prepare everything for a Game 
     public void initGame(ActionEvent event) throws Exception {
         String imgPath = null;
         Image img = null;
         cardPositions = new ImageView[16];
         cards = new GameCard[16];
 
+        //ImageViews (indexes equal to cards[])
         cardPositions[0] = card1;
         cardPositions[1] = card2;
         cardPositions[2] = card3;
@@ -136,30 +145,40 @@ public class GameController implements Initializable, ControlledScreen {
         cardPositions[14] = card15;
         cardPositions[15] = card16;
 
+        //pick the first 12 cards 
         for (int i = 0; i < 12; i++) {
             cards[i] = game.pickCard();
             System.out.println(cards[i]);
         }
 
+        //display picked cards in the ImageViews
         for (int i = 0; i < 12; i++) {
             imgPath = cards[i].getImagePath();
             img = new Image(Set.class.getResourceAsStream(imgPath));
             cardPositions[i].setImage(img);
         }
 
+        //if there is no SET, pick cards until there is a SET
         if(checkForSet() == false){
             addCards(1);
         }
 
+        //safe players in array -> used later
         players[0] = game.player1;
         players[1] = game.player2;
         players[2] = game.player3;
         players[3] = game.player4;
 
+        //desable start button to prevent another initialisation
         start.setDisable(true);
+        //initialize sound model
         soundPlayer.playCardSound();
     }
 
+    /*
+    This method sets the set variable to the players id who klicke SET
+    if no other player klicked fist
+    */
     public void setClicked(ActionEvent event) {
         Button btn = (Button) event.getSource();
         String playerId = btn.getId();
@@ -171,9 +190,13 @@ public class GameController implements Initializable, ControlledScreen {
         }
     }
 
+    /*
+    This method handles the card selection for a SET after the SET button was klicked
+    */
     public void cardClicked(MouseEvent event) throws Exception{
 
-        if (set != -1) {
+        if (set != -1) { //Set has to be 1 , 2, 3 , 4 for the playerIDs
+            //get the card and store it in selectedCards[]
             ImageView card = (ImageView) event.getSource();
             String cardId = card.getId();
             cardId = cardId.substring(4);
@@ -181,7 +204,8 @@ public class GameController implements Initializable, ControlledScreen {
             selectedCards[cardCounter] = Id;
             cardCounter++;
 
-            if (cardCounter == 3) {
+            //if this Card selection was the third check for correctnes
+            if (cardCounter == 3) { 
                 if (isSet(cards[selectedCards[0]], cards[selectedCards[1]], cards[selectedCards[2]]) == true) {
                     addPoint(set);
                     soundPlayer.playPointSound();
@@ -190,38 +214,54 @@ public class GameController implements Initializable, ControlledScreen {
                 } else {
                     soundPlayer.playFailSound();
                 }
+                //reset values for next SET
                 cardCounter = 0;
                 set = -1;
-                //Arrays.fill(selectedCards, -1);
+                //if there are no SETs add cards until there is one
                 while(checkForSet() == false && game.getCardCount() != 0){
                     addCards(1);
                 }
             }
 
         } else {
+            //SET has to be clicked before a card can be selected
             System.out.println("SET has to be klicked first!");
         }
     }
 
+    /**
+     *      GAMEMANAGEMENT
+     */
+    
+    /*
+    This method removes all cards after they have been use for a Set
+    */
     public void removeUsedCards(int pos1, int pos2, int pos3) {
+        //Remove the Images from the view
         String imgPath = "/resources/cards/card-back.jpg";
         Image img = new Image(Set.class.getResourceAsStream(imgPath));
         cardPositions[pos1].setImage(img);
         cardPositions[pos2].setImage(img);
         cardPositions[pos3].setImage(img);
-                
+        //Remove the cards from cards-array    
         cards[pos1] = null;
         cards[pos2] = null;
         cards[pos3] = null;
     }
 
+    /*
+    Adds Cards to the View if there are Cards left (81)
+    */
     public void addCards(int amount) throws Exception{
+        //if there are no cards left -> Game is over!
         if(game.getCardCount() == 0){
             gameEnd();
         }
+        //prevent from picking more cards than cards are left
         if(amount >= game.getCardCount()) {
             amount = game.getCardCount();
         }
+        //pick cards an display in the view
         String imgPath;
         Image img;
         for (int i = 0; amount > 0; i++) {
@@ -233,15 +273,23 @@ public class GameController implements Initializable, ControlledScreen {
                 amount--;
             }
         }
+        //refresh the cardcounter in view
         cardCount.setText("" + game.getCardCount());
     }
 
+    /*
+    Adds a point if a player found a SET
+    */
     public void addPoint(int playerId) {
         players[playerId].addPoint();
         Label label = (Label) controller.lookup("#player" + playerId + "Points");
+        //Refresh Scoreboard
         label.setText("" + players[playerId].getPoints());
     }
 
+    /*
+    Loops through all displayed cards an checks if there is a SET
+    */
     public boolean checkForSet() {
 
         for (int ai = 0; ai < cards.length; ai++) {
@@ -261,6 +309,9 @@ public class GameController implements Initializable, ControlledScreen {
         return false;
     }
     
+    /*
+    Retruns the number of free positions for cards
+    */
     public int checkFreePositions(){
         int freePositions = 0;
         int lockedPositions = 0;
@@ -278,7 +329,10 @@ public class GameController implements Initializable, ControlledScreen {
         System.out.println(freePositions);
         return freePositions;
     }
-
+    
+    /*
+    Checks if the given cards are a SET
+    */
     public boolean isSet(GameCard c1, GameCard c2, GameCard c3) {
 
         if (!((c1.getNumber() == c2.getNumber()) && (c2.getNumber() == c3.getNumber())
@@ -301,12 +355,16 @@ public class GameController implements Initializable, ControlledScreen {
         return true;
     }
 
+    
+     /**
+     *      NAVIGATION
+     */
     public void goToMain(ActionEvent event) {
         controller.setScreen(Set.MAIN_MENU);
     }
 
     public void gameEnd() throws Exception {
-        //Find winner
+        //Find winner(s)
         String[] winners = new String[4];
         int wCount = 0;
         int max = 0;
@@ -324,6 +382,7 @@ public class GameController implements Initializable, ControlledScreen {
             }
         }
 
+        //Create new View (new Window)
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Set.WINNER_FXML));
 
         Stage stage = new Stage();
@@ -332,14 +391,16 @@ public class GameController implements Initializable, ControlledScreen {
                         (Pane) loader.load()
                 )
         );
-
+        
+        //Get the controller of the winnerscreen
         WinnerController winController = loader.<WinnerController>getController();
-        //controller.setScreen(Set.WINNER);
-
         stage.show();
+        //Inject Dependencies (winnernames)
         winController.initData(winners);
         soundPlayer.playApplouseSound();
-
+        
+        //Reload gameview to be able to start a new game an let garbage collector
+        //remove unused gameobjects
         controller.setScreen(Set.MAIN_MENU);
         controller.unloadScreen(Set.GAME);
         controller.loadScreen(Set.GAME, Set.GAME_FXML);
