@@ -80,8 +80,11 @@ public class GameController implements Initializable, ControlledScreen {
     private Button setPlayer3;
     @FXML
     private Button setPlayer4;
+    
     @FXML
     private Button start;
+    @FXML
+    private Label cardCount;
 
     private Game game;
 
@@ -110,7 +113,7 @@ public class GameController implements Initializable, ControlledScreen {
         game.shuffleCards();
     }
 
-    public void initGame(ActionEvent event) {
+    public void initGame(ActionEvent event) throws Exception {
         String imgPath = null;
         Image img = null;
         cardPositions = new ImageView[16];
@@ -144,13 +147,15 @@ public class GameController implements Initializable, ControlledScreen {
             cardPositions[i].setImage(img);
         }
 
-        checkForSet();
+        if(checkForSet() == false){
+            addCards(1);
+        }
 
         players[0] = game.player1;
         players[1] = game.player2;
         players[2] = game.player3;
         players[3] = game.player4;
-        
+
         start.setDisable(true);
         soundPlayer.playCardSound();
     }
@@ -158,7 +163,7 @@ public class GameController implements Initializable, ControlledScreen {
     public void setClicked(ActionEvent event) {
         Button btn = (Button) event.getSource();
         String playerId = btn.getId();
-   
+
         if (set == -1) {
             playerId = playerId.substring(9);
             int Id = Integer.parseInt(playerId);
@@ -166,7 +171,7 @@ public class GameController implements Initializable, ControlledScreen {
         }
     }
 
-    public void cardClicked(MouseEvent event) {
+    public void cardClicked(MouseEvent event) throws Exception{
 
         if (set != -1) {
             ImageView card = (ImageView) event.getSource();
@@ -181,13 +186,16 @@ public class GameController implements Initializable, ControlledScreen {
                     addPoint(set);
                     soundPlayer.playPointSound();
                     removeUsedCards(selectedCards[0], selectedCards[1], selectedCards[2]);
-                    addCards(3);
-                }else{
+                    addCards(checkFreePositions());
+                } else {
                     soundPlayer.playFailSound();
                 }
                 cardCounter = 0;
                 set = -1;
-                Arrays.fill(selectedCards, -1);
+                //Arrays.fill(selectedCards, -1);
+                while(checkForSet() == false && game.getCardCount() != 0){
+                    addCards(1);
+                }
             }
 
         } else {
@@ -196,12 +204,24 @@ public class GameController implements Initializable, ControlledScreen {
     }
 
     public void removeUsedCards(int pos1, int pos2, int pos3) {
+        String imgPath = "/resources/cards/card-back.jpg";
+        Image img = new Image(Set.class.getResourceAsStream(imgPath));
+        cardPositions[pos1].setImage(img);
+        cardPositions[pos2].setImage(img);
+        cardPositions[pos3].setImage(img);
+                
         cards[pos1] = null;
         cards[pos2] = null;
         cards[pos3] = null;
     }
 
-    public void addCards(int amount) {
+    public void addCards(int amount) throws Exception{
+        if(game.getCardCount() == 0){
+            gameEnd();
+        }
+        if(amount >= game.getCardCount()) {
+            amount = game.getCardCount();
+        }
         String imgPath;
         Image img;
         for (int i = 0; amount > 0; i++) {
@@ -213,8 +233,9 @@ public class GameController implements Initializable, ControlledScreen {
                 amount--;
             }
         }
+        cardCount.setText("" + game.getCardCount());
     }
-    
+
     public void addPoint(int playerId) {
         players[playerId].addPoint();
         Label label = (Label) controller.lookup("#player" + playerId + "Points");
@@ -238,6 +259,24 @@ public class GameController implements Initializable, ControlledScreen {
             }
         }
         return false;
+    }
+    
+    public int checkFreePositions(){
+        int freePositions = 0;
+        int lockedPositions = 0;
+        
+        for(int i = 0; i < 16; i++){
+            if(cards[i] != null){
+                lockedPositions ++;
+            }
+        }
+        
+        freePositions = 12 - lockedPositions;
+        if(freePositions < 0){
+            freePositions = 0;
+        }
+        System.out.println(freePositions);
+        return freePositions;
     }
 
     public boolean isSet(GameCard c1, GameCard c2, GameCard c3) {
@@ -271,21 +310,20 @@ public class GameController implements Initializable, ControlledScreen {
         String[] winners = new String[4];
         int wCount = 0;
         int max = 0;
-        for(int i = 0; i <=3; i++){
-            if(players[i].getPoints() > max){
+        for (int i = 0; i <= 3; i++) {
+            if (players[i].getPoints() > max) {
                 winners[0] = players[i].getName();
                 max = players[i].getPoints();
                 wCount = 1;
                 winners[1] = null;
                 winners[2] = null;
                 winners[3] = null;
-            }
-            if(players[i].getPoints() == max){
+            }else if (players[i].getPoints() == max) {
                 winners[wCount] = players[i].getName();
-                wCount ++;
+                wCount++;
             }
         }
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Set.WINNER_FXML));
 
         Stage stage = new Stage();
@@ -297,11 +335,11 @@ public class GameController implements Initializable, ControlledScreen {
 
         WinnerController winController = loader.<WinnerController>getController();
         //controller.setScreen(Set.WINNER);
-        
+
         stage.show();
         winController.initData(winners);
         soundPlayer.playApplouseSound();
-        
+
         controller.setScreen(Set.MAIN_MENU);
         controller.unloadScreen(Set.GAME);
         controller.loadScreen(Set.GAME, Set.GAME_FXML);

@@ -111,5 +111,6 @@
       <Label id="player1Points" layoutX="564.0" layoutY="24.0" styleClass="player2" text="0" />
       <Label id="player2Points" layoutX="707.0" layoutY="22.0" styleClass="player3" text="0" />
       <Label id="player3Points" layoutX="842.0" layoutY="22.0" styleClass="player4" text="0" />
+      <Label id="cardCount" fx:id="cardCount" layoutX="278.0" layoutY="428.0" styleClass="player1" text="69" />
    </children>
 </AnchorPane>

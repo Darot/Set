@@ -28,6 +28,10 @@ public class Game {
         player4 = new Player("Tobias");
     }
 
+    public int getCardCount(){
+        return cardCounter;
+    }
+    
     public GameCard[] getCards() {
         return cards;
     }
