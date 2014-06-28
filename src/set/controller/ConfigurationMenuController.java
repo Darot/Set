@@ -12,7 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import set.Set;
 import set.services.Configurator;
 
@@ -31,6 +33,7 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     Label player3Name;
     @FXML
     Label player4Name;
+
     @FXML
     TextField player1Textarea;
     @FXML
@@ -40,14 +43,51 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     @FXML
     TextField player4Textarea;
 
+    @FXML
+    RadioButton red;
+    @FXML
+    RadioButton green;
+    @FXML
+    RadioButton blue;
+
+    final ToggleGroup group = new ToggleGroup();
+
     ScreenController controller;
+
+    private String colour;
+
+    public ConfigurationMenuController() {
+
+    }
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadConfiguration("src/config/config.properties");
+        red.setToggleGroup(group);
+        blue.setToggleGroup(group);
+        green.setToggleGroup(group);
+    }
+
+    public void colourSelected(ActionEvent event) {
+        red.setToggleGroup(group);
+        blue.setToggleGroup(group);
+        green.setToggleGroup(group);
+        RadioButton btn = (RadioButton) event.getSource();
+        btn.setSelected(true);
+        colour = btn.getId();
+    }
+    
+    public void allColoursSelected(){
+        red.setToggleGroup(null);
+        blue.setToggleGroup(null);
+        green.setToggleGroup(null);
+        red.setSelected(true);
+        blue.setSelected(true);
+        green.setSelected(true);
+        colour = "all";
     }
 
     public void addPlayer1() {
@@ -82,9 +122,13 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         player4Name.setText("");
     }
 
-    public void loadConfiguration() {
+    public void loadDefaults() {
+        loadConfiguration("src/config/defaultConfig.properties");
+    }
+
+    private void loadConfiguration(String path) {
         Configurator configurator = new Configurator();
-        configurator.loadConfiguration("src/config/config.properties");
+        configurator.loadConfiguration(path);
         //Set loaded values
         player1Name.setText(configurator.getPlayer1Name());
         player2Name.setText(configurator.getPlayer2Name());
@@ -94,21 +138,18 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
 
     public void saveConfiguration() {
         Configurator configurator = new Configurator();
-        configurator.writeConfiguration();
-        
-        configurator.setColour1("red");
-        configurator.setColour2("green");
-        configurator.setColour3("blue");
-        
+
+        configurator.setColour(colour);
+
         configurator.setPlayer1Name(player1Name.getText());
         configurator.setPlayer2Name(player2Name.getText());
         configurator.setPlayer3Name(player3Name.getText());
         configurator.setPlayer4Name(player4Name.getText());
-        
+
         configurator.setSymbol1("rectangle");
         configurator.setSymbol2("oval");
         configurator.setSymbol3("wave");
-        
+
         configurator.writeConfiguration();
     }
 

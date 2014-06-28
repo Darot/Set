@@ -18,16 +18,13 @@ import java.util.Properties;
  */
 public class Configurator {
 
-    //names
-
+    //name
     private String player1Name = "Tobias";
     private String player2Name = "Hans";
     private String player3Name = "Fritz";
     private String player4Name = "Gisela";
 
-    private String colour1 = "red";
-    private String colour2 = "green";
-    private String colour3 = "blue";
+    private String colour = "all";
 
     private String symbol1 = "rectangel";
     private String symbol2 = "oval";
@@ -46,9 +43,7 @@ public class Configurator {
             player3Name = properties.getProperty("player3Name");
             player4Name = properties.getProperty("player4Name");
 
-            colour1 = properties.getProperty("colour1");
-            colour2 = properties.getProperty("colour2");
-            colour3 = properties.getProperty("colour3");
+            setColour(properties.getProperty("colour"));
 
             symbol1 = properties.getProperty("symbol1");
             symbol2 = properties.getProperty("symbol2");
@@ -72,9 +67,7 @@ public class Configurator {
             properties.setProperty("player3Name", player3Name);
             properties.setProperty("player4Name", player4Name);
             //Save color setup
-            properties.setProperty("colour1", colour1);
-            properties.setProperty("colour2", colour2);
-            properties.setProperty("colour3", colour3);
+            properties.setProperty("colour", colour);
             //save symbols
             properties.setProperty("symbol1", symbol1);
             properties.setProperty("symbol2", symbol2);
@@ -147,48 +140,6 @@ public class Configurator {
     }
 
     /**
-     * @return the colour1
-     */
-    public String getColour1() {
-        return colour1;
-    }
-
-    /**
-     * @param colour1 the colour1 to set
-     */
-    public void setColour1(String colour1) {
-        this.colour1 = colour1;
-    }
-
-    /**
-     * @return the colour2
-     */
-    public String getColour2() {
-        return colour2;
-    }
-
-    /**
-     * @param colour2 the colour2 to set
-     */
-    public void setColour2(String colour2) {
-        this.colour2 = colour2;
-    }
-
-    /**
-     * @return the colour3
-     */
-    public String getColour3() {
-        return colour3;
-    }
-
-    /**
-     * @param colour3 the colour3 to set
-     */
-    public void setColour3(String colour3) {
-        this.colour3 = colour3;
-    }
-
-    /**
      * @return the symbol1
      */
     public String getSymbol1() {
@@ -228,5 +179,19 @@ public class Configurator {
      */
     public void setSymbol3(String symbol3) {
         this.symbol3 = symbol3;
+    }
+
+    /**
+     * @return the colour
+     */
+    public String getColour() {
+        return colour;
+    }
+
+    /**
+     * @param colour the colour to set
+     */
+    public void setColour(String colour) {
+        this.colour = colour;
     }
 }

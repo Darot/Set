@@ -173,6 +173,7 @@ public class GameController implements Initializable, ControlledScreen {
         start.setDisable(true);
         //initialize sound model
         soundPlayer.playCardSound();
+        cardCount.setText("" + game.getCardCount());
     }
 
     /*

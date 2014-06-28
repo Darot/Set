@@ -14,7 +14,7 @@ import java.util.Random;
 public class Game {
 
     private GameCard[] cards = new GameCard[81];
-    private int cardCounter = 80;
+    private int cardCounter = 0;
     
     public Player player1;
     public Player player2;
@@ -57,6 +57,7 @@ public class Game {
                         card = new GameCard(colours[k], shadings[j], symbols[i], l + 1);
                         cards[cardNr] = card;
                         cardNr++;
+                        cardCounter++;
                     }
                 }
 
