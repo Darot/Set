@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import set.Set;
+import set.services.Configurator;
 
 /**
  * FXML Controller class
@@ -43,6 +44,17 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
 
     public void addPlayer4() {
         System.out.println("not implemented yet!");
+    }
+    
+    public void loadConfiguration(){
+        Configurator configurator = new Configurator();
+        configurator.loadConfiguration("src/config/config.properties");
+        System.out.println(configurator.getPlayer1Name());
+    }
+    
+    public void saveConfiguration(){
+        Configurator configurator = new Configurator();
+        configurator.writeConfiguration();
     }
 
     @Override
