@@ -8,3 +8,51 @@ and open the template in the editor.
     Author     : daniel
 */
 
+.background {
+    -fx-background-color: lightblue;
+    -fx-background-image: url("../img/bg3.jpg");
+    -fx-background-position: left bottom;
+    //background-image: url(/resources/bg-green-table.jpg);
+}
+
+.player1Name {
+    -fx-text-fill: red;
+    -fx-font-size: 33px;
+    
+}
+
+.player2Name{
+    -fx-text-fill: blue;
+    -fx-font-size: 33px;
+}
+
+.player3Name{
+    -fx-text-fill: purple;
+    -fx-font-size: 33px;
+}
+
+.player4Name{
+    -fx-text-fill: yellow;
+    -fx-font-size: 33px;
+}
+
+.heading{
+    -fx-text-fill: red;
+    -fx-font-size: 33px;
+}
+
+.red {
+    -fx-text-fill: red;
+    -fx-font-size: 33px;
+    
+}
+
+.green{
+    -fx-text-fill: green;
+    -fx-font-size: 33px;
+}
+
+.blue{
+    -fx-text-fill: blue;
+    -fx-font-size: 33px;
+}

@@ -42,9 +42,9 @@ public class Configurator {
             properties.load(reader);
 
             player1Name = properties.getProperty("player1Name");
-            player2Name = properties.getProperty("player1Name");
-            player3Name = properties.getProperty("player1Name");
-            player4Name = properties.getProperty("player1Name");
+            player2Name = properties.getProperty("player2Name");
+            player3Name = properties.getProperty("player3Name");
+            player4Name = properties.getProperty("player4Name");
 
             colour1 = properties.getProperty("colour1");
             colour2 = properties.getProperty("colour2");
@@ -67,18 +67,18 @@ public class Configurator {
         try {
             Properties properties = new Properties();
             //Save playerames
-            properties.setProperty("player1Name", getPlayer1Name());
-            properties.setProperty("player2Name", getPlayer2Name());
-            properties.setProperty("player3Name", getPlayer3Name());
-            properties.setProperty("player4Name", getPlayer4Name());
+            properties.setProperty("player1Name", player1Name);
+            properties.setProperty("player2Name", player2Name);
+            properties.setProperty("player3Name", player3Name);
+            properties.setProperty("player4Name", player4Name);
             //Save color setup
-            properties.setProperty("colour1", getColour1());
-            properties.setProperty("colour2", getColour2());
-            properties.setProperty("colour3", getColour3());
+            properties.setProperty("colour1", colour1);
+            properties.setProperty("colour2", colour2);
+            properties.setProperty("colour3", colour3);
             //save symbols
-            properties.setProperty("symbol1", getSymbol1());
-            properties.setProperty("symbol2", getSymbol2());
-            properties.setProperty("symbol3", getSymbol3());
+            properties.setProperty("symbol1", symbol1);
+            properties.setProperty("symbol2", symbol2);
+            properties.setProperty("symbol3", symbol3);
 
             FileWriter writer = new FileWriter(configFile);
             properties.store(writer, "GameSetup");

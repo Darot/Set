@@ -9,7 +9,10 @@ import interfaces.controller.ControlledScreen;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import set.Set;
 import set.services.Configurator;
 
@@ -19,6 +22,23 @@ import set.services.Configurator;
  * @author zeus
  */
 public class ConfigurationMenuController implements Initializable, ControlledScreen {
+
+    @FXML
+    Label player1Name;
+    @FXML
+    Label player2Name;
+    @FXML
+    Label player3Name;
+    @FXML
+    Label player4Name;
+    @FXML
+    TextField player1Textarea;
+    @FXML
+    TextField player2Textarea;
+    @FXML
+    TextField player3Textarea;
+    @FXML
+    TextField player4Textarea;
 
     ScreenController controller;
 
@@ -31,40 +51,75 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     }
 
     public void addPlayer1() {
-        System.out.println("not implemented yet!");
+        player1Name.setText(player1Textarea.getText());
     }
 
     public void addPlayer2() {
-        System.out.println("not implemented yet!");
+        player2Name.setText(player2Textarea.getText());
     }
 
     public void addPlayer3() {
-        System.out.println("not implemented yet!");
+        player3Name.setText(player3Textarea.getText());
     }
 
     public void addPlayer4() {
-        System.out.println("not implemented yet!");
+        player4Name.setText(player4Textarea.getText());
     }
-    
-    public void loadConfiguration(){
+
+    public void deletePlayer1() {
+        player1Name.setText("");
+    }
+
+    public void deletePlayer2() {
+        player2Name.setText("");
+    }
+
+    public void deletePlayer3() {
+        player3Name.setText("");
+    }
+
+    public void deletePlayer4() {
+        player4Name.setText("");
+    }
+
+    public void loadConfiguration() {
         Configurator configurator = new Configurator();
         configurator.loadConfiguration("src/config/config.properties");
-        System.out.println(configurator.getPlayer1Name());
+        //Set loaded values
+        player1Name.setText(configurator.getPlayer1Name());
+        player2Name.setText(configurator.getPlayer2Name());
+        player3Name.setText(configurator.getPlayer3Name());
+        player4Name.setText(configurator.getPlayer4Name());
     }
-    
-    public void saveConfiguration(){
+
+    public void saveConfiguration() {
         Configurator configurator = new Configurator();
+        configurator.writeConfiguration();
+        
+        configurator.setColour1("red");
+        configurator.setColour2("green");
+        configurator.setColour3("blue");
+        
+        configurator.setPlayer1Name(player1Name.getText());
+        configurator.setPlayer2Name(player2Name.getText());
+        configurator.setPlayer3Name(player3Name.getText());
+        configurator.setPlayer4Name(player4Name.getText());
+        
+        configurator.setSymbol1("rectangle");
+        configurator.setSymbol2("oval");
+        configurator.setSymbol3("wave");
+        
         configurator.writeConfiguration();
     }
 
     @Override
     public void setScreenParent(ScreenController screenParent) {
-        
+
         controller = screenParent;
     }
 
     public void goToMain(ActionEvent event) {
-        
+
         controller.setScreen(Set.MAIN_MENU);
     }
 

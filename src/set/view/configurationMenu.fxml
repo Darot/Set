@@ -1,33 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.ConfigurationMenuController">
+<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/configuration.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.ConfigurationMenuController">
    <children>
-      <Button layoutX="1138.0" layoutY="970.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
       <Button layoutX="17.0" layoutY="972.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
-      <TextField layoutX="127.0" layoutY="190.0" />
-      <TextField layoutX="127.0" layoutY="254.0" />
-      <TextField layoutX="126.0" layoutY="127.0" />
-      <TextField layoutX="128.0" layoutY="325.0" />
-      <Label layoutX="104.0" layoutY="65.0" prefHeight="36.0" prefWidth="171.0" styleClass="playerHeading" text="Players" />
+      <TextField id="player2Textarea" fx:id="player2Textarea" layoutX="127.0" layoutY="190.0" onAction="#addPlayer2" styleClass="player2Textarea" />
+      <TextField id="player3Textarea" fx:id="player3Textarea" layoutX="127.0" layoutY="254.0" onAction="#addPlayer3" styleClass="player3Textarea" />
+      <TextField id="player1Textarea" fx:id="player1Textarea" layoutX="126.0" layoutY="127.0" onAction="#addPlayer1" styleClass="player1Textarea" />
+      <TextField id="player4Textarea" fx:id="player4Textarea" layoutX="128.0" layoutY="325.0" onAction="#addPlayer4" />
+      <Label layoutX="104.0" layoutY="65.0" prefHeight="36.0" prefWidth="171.0" styleClass="heading" text="Players:" />
       <Button fx:id="addPlayer1" layoutX="96.0" layoutY="127.0" mnemonicParsing="false" onAction="#addPlayer1" prefHeight="25.0" prefWidth="23.0" text="+" />
       <Button fx:id="addPlayer2" layoutX="96.0" layoutY="189.0" mnemonicParsing="false" onAction="#addPlayer2" prefHeight="25.0" prefWidth="23.0" text="+" />
       <Button fx:id="addPlayer3" layoutX="96.0" layoutY="254.0" mnemonicParsing="false" onAction="#addPlayer3" prefHeight="25.0" prefWidth="23.0" text="+" />
       <Button fx:id="addPlayer4" layoutX="97.0" layoutY="324.0" mnemonicParsing="false" onAction="#addPlayer4" prefHeight="25.0" prefWidth="23.0" text="+" />
-      <Button fx:id="deletePlayer2" layoutX="300.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="-" />
-      <Button fx:id="deletePlayer3" layoutX="300.0" layoutY="254.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="-" />
-      <Button fx:id="deletePlayer4" layoutX="302.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="29.0" text="-" />
-      <Label fx:id="player1Name" layoutX="354.0" layoutY="129.0" prefHeight="25.0" prefWidth="171.0" styleClass="player1Name" text="Label" />
-      <Label fx:id="player2Name" layoutX="355.0" layoutY="190.0" prefHeight="25.0" prefWidth="171.0" styleClass="player2Name" text="Label" />
-      <Label fx:id="player3Name" layoutX="352.0" layoutY="254.0" prefHeight="25.0" prefWidth="171.0" styleClass="player3Name" text="Label" />
-      <Label fx:id="player4Name" layoutX="351.0" layoutY="325.0" prefHeight="25.0" prefWidth="171.0" styleClass="player4Name" text="Label" />
-      <Label layoutX="97.0" layoutY="387.0" prefHeight="36.0" prefWidth="171.0" styleClass="playerHeading" text="Symbols" />
-      <Button layoutX="352.0" layoutY="534.0" mnemonicParsing="false" onAction="#saveConfiguration" text="Save" />
-      <Button layoutX="424.0" layoutY="534.0" mnemonicParsing="false" onAction="#loadConfiguration" text="Load" />
+      <Button fx:id="deletePlayer2" layoutX="300.0" layoutY="190.0" mnemonicParsing="false" onAction="#deletePlayer2" prefHeight="25.0" prefWidth="29.0" text="-" />
+      <Button fx:id="deletePlayer3" layoutX="300.0" layoutY="254.0" mnemonicParsing="false" onAction="#deletePlayer3" prefHeight="25.0" prefWidth="29.0" text="-" />
+      <Button fx:id="deletePlayer4" layoutX="301.0" layoutY="325.0" mnemonicParsing="false" onAction="#deletePlayer4" prefHeight="25.0" prefWidth="29.0" text="-" />
+      <Label id="player1Name" fx:id="player1Name" layoutX="352.0" layoutY="120.0" prefHeight="39.0" prefWidth="354.0" styleClass="player1Name" text="Label" />
+      <Label id="player2Name" fx:id="player2Name" layoutX="352.0" layoutY="183.0" prefHeight="39.0" prefWidth="354.0" styleClass="player2Name" text="Label" />
+      <Label id="player3Name" fx:id="player3Name" layoutX="352.0" layoutY="247.0" prefHeight="39.0" prefWidth="354.0" styleClass="player3Name" text="Label" />
+      <Label id="player4Name" fx:id="player4Name" layoutX="352.0" layoutY="318.0" prefHeight="39.0" prefWidth="354.0" styleClass="player4Name" text="Label" />
+      <Label layoutX="97.0" layoutY="387.0" prefHeight="36.0" prefWidth="171.0" styleClass="heading" text="Symbols:" />
+      <Button layoutX="514.0" layoutY="855.0" mnemonicParsing="false" onAction="#saveConfiguration" text="Save" />
+      <Button layoutX="711.0" layoutY="855.0" mnemonicParsing="false" onAction="#loadConfiguration" text="Load Defaults" />
+      <Button fx:id="deletePlayer21" layoutX="299.0" layoutY="127.0" mnemonicParsing="false" onAction="#deletePlayer1" prefHeight="25.0" prefWidth="29.0" text="-" />
+      <ImageView fitHeight="82.0" fitWidth="124.0" layoutX="100.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/oval.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="108.0" layoutX="205.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/rectangle.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="82.0" fitWidth="108.0" layoutX="311.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/wave.jpg" />
+         </image>
+      </ImageView>
+      <CheckBox mnemonicParsing="false" text="CheckBox" />
+      <RadioButton layoutX="129.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton layoutX="234.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton layoutX="340.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton disable="true" layoutX="653.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton disable="true" layoutX="547.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton disable="true" layoutX="442.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <ImageView disable="true" fitHeight="82.0" fitWidth="108.0" layoutX="624.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/wave.jpg" />
+         </image>
+      </ImageView>
+      <ImageView disable="true" fitHeight="82.0" fitWidth="108.0" layoutX="518.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/rectangle.jpg" />
+         </image>
+      </ImageView>
+      <ImageView disable="true" fitHeight="82.0" fitWidth="124.0" layoutX="413.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/images/oval.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="97.0" layoutY="597.0" prefHeight="36.0" prefWidth="171.0" styleClass="heading" text="Colors:" />
+      <Label layoutX="96.0" layoutY="661.0" prefHeight="39.0" prefWidth="67.0" styleClass="red" text="Red" />
+      <Label layoutX="203.0" layoutY="661.0" prefHeight="39.0" prefWidth="108.0" styleClass="green" text="Green" />
+      <Label layoutX="339.0" layoutY="661.0" prefHeight="39.0" prefWidth="82.0" styleClass="blue" text="Blue" />
+      <RadioButton layoutX="118.0" layoutY="709.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton layoutX="245.0" layoutY="709.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton layoutX="368.0" layoutY="709.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
    </children>
 </AnchorPane>
