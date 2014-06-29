@@ -93,16 +93,16 @@
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <Label id="player1" layoutX="32.0" layoutY="1.0" prefHeight="59.0" prefWidth="149.0" styleClass="player1" text="Player 1">
+      <Label id="player1" fx:id="player1" layoutX="32.0" layoutY="1.0" prefHeight="59.0" prefWidth="149.0" styleClass="player1" text="Player 1">
          <font>
             <Font size="33.0" />
          </font>
          <effect>
             <Bloom />
          </effect></Label>
-      <Label id="player4" layoutX="16.0" layoutY="901.0" prefHeight="59.0" prefWidth="149.0" styleClass="player4" text="Player 1" />
-      <Label id="player3" layoutX="1108.0" layoutY="895.0" prefHeight="59.0" prefWidth="149.0" styleClass="player3" text="Player 1" />
-      <Label id="player2" layoutX="1114.0" layoutY="8.0" prefHeight="59.0" prefWidth="149.0" styleClass="player2" text="Player 1" />
+      <Label id="player4" fx:id="player4" layoutX="16.0" layoutY="901.0" prefHeight="59.0" prefWidth="149.0" styleClass="player4" text="Player 4" />
+      <Label id="player3" fx:id="player3" layoutX="1108.0" layoutY="895.0" prefHeight="59.0" prefWidth="149.0" styleClass="player3" text="Player 3" />
+      <Label id="player2" fx:id="player2" layoutX="1114.0" layoutY="8.0" prefHeight="59.0" prefWidth="149.0" styleClass="player2" text="Player 2" />
       <Button fx:id="setPlayer0" layoutX="34.0" layoutY="59.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
       <Button fx:id="setPlayer1" layoutX="1138.0" layoutY="65.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
       <Button fx:id="setPlayer3" layoutX="18.0" layoutY="838.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />

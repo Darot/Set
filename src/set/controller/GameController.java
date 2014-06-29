@@ -31,6 +31,7 @@ import set.model.Game;
 import set.model.GameCard;
 import set.model.Player;
 import set.model.SoundPlayer;
+import set.services.Configurator;
 
 /**
  * FXML Controller class
@@ -88,6 +89,15 @@ public class GameController implements Initializable, ControlledScreen {
     private Button start;
     @FXML 
     private Label cardCount;
+    
+    @FXML
+    private Label player1;
+    @FXML
+    private Label player2;
+    @FXML
+    private Label player3;
+    @FXML
+    private Label player4;
 
     private Game game;
 
@@ -107,13 +117,11 @@ public class GameController implements Initializable, ControlledScreen {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
 
     public GameController() {
-        game = new Game();
-        game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
-        game.shuffleCards();
+
     }
 
     /**
@@ -124,6 +132,19 @@ public class GameController implements Initializable, ControlledScreen {
     public void initGame(ActionEvent event) throws Exception {
         String imgPath = null;
         Image img = null;
+        Configurator config = new Configurator();
+        config.loadConfiguration("src/config/config.properties");
+        
+        game = new Game();
+        if(config.getColour().equals("all")){
+            System.out.println(config.getColour());
+            game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
+        } else{
+            game.generateCards("oval", "rectangle", "wave", config.getColour());
+        }
+        
+        game.shuffleCards();
+        
         cardPositions = new ImageView[16];
         cards = new GameCard[16];
 
@@ -168,6 +189,19 @@ public class GameController implements Initializable, ControlledScreen {
         players[1] = game.player2;
         players[2] = game.player3;
         players[3] = game.player4;
+        //Display Players / Disable unused!
+        player1.setText("Tobias");
+        for(int i = 0; i < 4; i++){
+            if(players[i].getName().equals(" ")){
+                Label label = (Label) controller.lookup("#player"+(+i+1));
+                label.setDisable(true);
+                Button button = (Button) controller.lookup("#setPlayer"+i);
+                button.setDisable(true);
+            }else {
+                Label label = (Label) controller.lookup("#player" + (+i+1));
+                label.setText(players[i].getName());
+            }
+        }
 
         //desable start button to prevent another initialisation
         start.setDisable(true);

@@ -8,6 +8,7 @@ package set.controller;
 import interfaces.controller.ControlledScreen;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,10 +66,10 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadConfiguration("src/config/config.properties");
         red.setToggleGroup(group);
         blue.setToggleGroup(group);
         green.setToggleGroup(group);
+        loadConfiguration("src/config/config.properties");
     }
 
     public void colourSelected(ActionEvent event) {
@@ -78,9 +79,10 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         RadioButton btn = (RadioButton) event.getSource();
         btn.setSelected(true);
         colour = btn.getId();
+
     }
-    
-    public void allColoursSelected(){
+
+    public void allColoursSelected() {
         red.setToggleGroup(null);
         blue.setToggleGroup(null);
         green.setToggleGroup(null);
@@ -107,19 +109,19 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     }
 
     public void deletePlayer1() {
-        player1Name.setText("");
+        player1Name.setText(" ");
     }
 
     public void deletePlayer2() {
-        player2Name.setText("");
+        player2Name.setText(" ");
     }
 
     public void deletePlayer3() {
-        player3Name.setText("");
+        player3Name.setText(" ");
     }
 
     public void deletePlayer4() {
-        player4Name.setText("");
+        player4Name.setText(" ");
     }
 
     public void loadDefaults() {
@@ -134,6 +136,21 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         player2Name.setText(configurator.getPlayer2Name());
         player3Name.setText(configurator.getPlayer3Name());
         player4Name.setText(configurator.getPlayer4Name());
+
+        colour = configurator.getColour();
+        if (colour.equals("all")) {
+            allColoursSelected();
+        }
+        //ToDo : This could be better!?
+        if (colour.equals("red")) {
+            red.setSelected(true);
+        }
+        if (colour.equals("blue")) {
+            blue.setSelected(true);
+        }
+        if (colour.equals("green")) {
+            green.setSelected(true);
+        }
     }
 
     public void saveConfiguration() {
@@ -151,6 +168,9 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         configurator.setSymbol3("wave");
 
         configurator.writeConfiguration();
+        //reload game view
+        controller.unloadScreen(Set.GAME);
+        controller.loadScreen(Set.GAME, Set.GAME_FXML);
     }
 
     @Override

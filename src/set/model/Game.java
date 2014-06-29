@@ -6,6 +6,7 @@
 package set.model;
 
 import java.util.Random;
+import set.services.Configurator;
 
 /**
  *
@@ -13,25 +14,27 @@ import java.util.Random;
  */
 public class Game {
 
-    private GameCard[] cards = new GameCard[81];
+    private GameCard[] cards;
     private int cardCounter = 0;
-    
+
     public Player player1;
     public Player player2;
     public Player player3;
     public Player player4;
 
     public Game() {
-        player1 = new Player("Tobias");
-        player2 = new Player("Tobias");
-        player3 = new Player("Tobias");
-        player4 = new Player("Tobias");
+        Configurator configurator = new Configurator();
+        configurator.loadConfiguration("src/config/config.properties");
+        player1 = new Player(configurator.getPlayer1Name());
+        player2 = new Player(configurator.getPlayer2Name());
+        player3 = new Player(configurator.getPlayer3Name());
+        player4 = new Player(configurator.getPlayer4Name());
     }
 
-    public int getCardCount(){
+    public int getCardCount() {
         return cardCounter;
     }
-    
+
     public GameCard[] getCards() {
         return cards;
     }
@@ -43,6 +46,7 @@ public class Game {
 
     //Initializes all GameCards with the symbols with the setup, the client has chosen.
     public void generateCards(String symbol1, String symbol2, String symbol3, String colour1, String colour2, String colour3) {
+        cards = new GameCard[81];
         String[] symbols = {symbol1, symbol2, symbol3};
         String[] colours = {colour1, colour2, colour3};
         String[] shadings = {"open", "solid", "striped"};
@@ -54,15 +58,37 @@ public class Game {
             for (int k = 0; k <= colours.length - 1; k++) { // 3 loops for colours
                 for (int j = 0; j <= 2; j++) { //3 loops for shadings
                     for (int l = 0; l <= 2; l++) {//3 loops for numbers
-                        card = new GameCard(colours[k], shadings[j], symbols[i], l + 1);
-                        cards[cardNr] = card;
-                        cardNr++;
-                        cardCounter++;
+                            card = new GameCard(colours[k], shadings[j], symbols[i], l + 1);
+                            cards[cardNr] = card;
+                            cardNr++;
+                            cardCounter++;
                     }
                 }
 
             }
         }
+        System.out.println(cardCounter);
+    }
+    
+        public void generateCards(String symbol1, String symbol2, String symbol3, String colour) {
+        cards = new GameCard[27];
+        String[] symbols = {symbol1, symbol2, symbol3};
+        String[] shadings = {"open", "solid", "striped"};
+
+        GameCard card;
+        int cardNr = 0;
+
+        for (int i = 0; i <= symbols.length - 1; i++) { // 3 loops for symbols
+                for (int j = 0; j <= 2; j++) { //3 loops for shadings
+                    for (int l = 0; l <= 2; l++) {//3 loops for numbers
+                            card = new GameCard(colour, shadings[j], symbols[i], l + 1);
+                            cards[cardNr] = card;
+                            cardNr++;
+                            cardCounter++;
+                    }
+                }
+        }
+        System.out.println(cardCounter);
     }
 
     //this method is used du shuffle the cards

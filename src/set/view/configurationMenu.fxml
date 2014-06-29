@@ -70,9 +70,9 @@
       <Label layoutX="96.0" layoutY="661.0" prefHeight="39.0" prefWidth="67.0" styleClass="red" text="Red" />
       <Label layoutX="203.0" layoutY="661.0" prefHeight="39.0" prefWidth="108.0" styleClass="green" text="Green" />
       <Label layoutX="339.0" layoutY="661.0" prefHeight="39.0" prefWidth="82.0" styleClass="blue" text="Blue" />
-      <RadioButton fx:id="red" layoutX="118.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton fx:id="green" layoutX="245.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton fx:id="blue" layoutX="368.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="red" fx:id="red" layoutX="118.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="green" fx:id="green" layoutX="245.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="blue" fx:id="blue" layoutX="368.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
       <Button layoutX="447.0" layoutY="672.0" mnemonicParsing="false" onAction="#allColoursSelected" prefHeight="58.0" prefWidth="58.0" text="ALL" />
    </children>
 </AnchorPane>
