@@ -155,7 +155,7 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
             cpu = true;
         }
         
-        player2Name.setDisable(cpu);
+        player2Name.setText("CPU");
         player3Name.setDisable(cpu);
         player4Name.setDisable(cpu);
         
@@ -171,7 +171,6 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         addPlayer3.setDisable(cpu);
         addPlayer4.setDisable(cpu);
         
-        deletePlayer2();
         deletePlayer3();
         deletePlayer4();
         

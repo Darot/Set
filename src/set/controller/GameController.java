@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -218,6 +222,18 @@ public class GameController implements Initializable, ControlledScreen {
         //initialize sound model
         soundPlayer.playCardSound();
         cardCount.setText("" + game.getCardCount());
+        
+        System.out.println(config.getCPU());
+        if(config.getCPU().equals("true")){
+            Task<Void> task = new Task<Void>(){
+
+                @Override
+                protected Void call() throws Exception {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+                
+            };
+        }
     }
 
     /*
@@ -354,6 +370,28 @@ public class GameController implements Initializable, ControlledScreen {
         return false;
     }
     
+    public int[] getNextSet() {
+        int[] cardPositions = new int[3];
+        for (int ai = 0; ai < cards.length; ai++) {
+            GameCard a = cards[ai];
+            for (int bi = ai + 1; bi < cards.length; bi++) {
+                GameCard b = cards[bi];
+                for (int ci = bi + 1; ci < cards.length; ci++) {
+                    GameCard c = cards[ci];
+                    if (a != null && b != null && c != null) {
+                        if (isSet(a, b, c)) {
+                            cardPositions[0] = ai;
+                            cardPositions[1] = bi;
+                            cardPositions[2] = ci;
+                            return cardPositions;
+                        }
+                    }
+                }
+            }
+        }
+        return cardPositions;
+    }
+    
     /*
     Retruns the number of free positions for cards
     */
@@ -374,6 +412,13 @@ public class GameController implements Initializable, ControlledScreen {
         System.out.println(freePositions);
         return freePositions;
     }
+    
+    public void cpuMakeSet() throws Exception{
+        int[] cardPositions = getNextSet();
+        removeUsedCards(cardPositions[0], cardPositions[1], cardPositions[2]);
+        addCards(3);
+        addPoint(1);
+    } 
     
     /*
     Checks if the given cards are a SET

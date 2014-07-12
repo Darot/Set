@@ -50,6 +50,8 @@ public class Configurator {
             symbol1 = properties.getProperty("symbol1");
             symbol2 = properties.getProperty("symbol2");
             symbol3 = properties.getProperty("symbol3");
+            
+            cpu = properties.getProperty("cpu");
 
         } catch (FileNotFoundException ex) {
             System.out.println("file does not exist");
