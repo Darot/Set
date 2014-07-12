@@ -163,9 +163,9 @@ public class GameController implements Initializable, ControlledScreen {
         game = new Game();
         if(config.getColour().equals("all")){
             System.out.println(config.getColour());
-            game.generateCards("oval", "rectangle", "wave", "red", "green", "blue");
+            game.generateCards(config.getSymbol1(), config.getSymbol2(), config.getSymbol3(), "red", "green", "blue");
         } else{
-            game.generateCards("oval", "rectangle", "wave", config.getColour());
+            game.generateCards(config.getSymbol1(), config.getSymbol2(), config.getSymbol3(), config.getColour());
         }
         
         game.shuffleCards();
@@ -480,10 +480,11 @@ public class GameController implements Initializable, ControlledScreen {
     public void saveGame(){
         int cardsOnTable = 0;
         for(int i = 0; i < cardPositions.length; i++){
-            if(cardPositions[i] != null){
+            if(cards[i] != null){
                 cardsOnTable++;
             }
         }
+        System.out.println(cardsOnTable);
         
         game.addCardCounter(cardsOnTable);
         

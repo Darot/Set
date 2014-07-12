@@ -45,12 +45,12 @@
             <Image url="@../../resources/images/wave.jpg" />
          </image>
       </ImageView>
-      <RadioButton layoutX="129.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton layoutX="234.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton layoutX="340.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton disable="true" layoutX="653.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton disable="true" layoutX="547.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton disable="true" layoutX="442.0" layoutY="546.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="oval" fx:id="oval" layoutX="129.0" layoutY="546.0" mnemonicParsing="false" onAction="#setSymbol" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="rectangle" fx:id="rectangle" layoutX="234.0" layoutY="546.0" mnemonicParsing="false" onAction="#setSymbol" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="wave" fx:id="wave" layoutX="340.0" layoutY="546.0" mnemonicParsing="false" onAction="#setSymbol" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="star" fx:id="star" layoutX="653.0" layoutY="546.0" mnemonicParsing="false" onAction="#setSymbol" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="heart" fx:id="heart" layoutX="547.0" layoutY="546.0" mnemonicParsing="false" onAction="#setSymbol" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="diamond" fx:id="diamond" layoutX="442.0" layoutY="546.0" mnemonicParsing="false" onAction="#setSymbol" prefHeight="18.0" prefWidth="16.0" />
       <ImageView disable="true" fitHeight="82.0" fitWidth="108.0" layoutX="624.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/images/wave.jpg" />

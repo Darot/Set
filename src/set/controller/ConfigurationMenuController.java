@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import set.Set;
 import set.services.Configurator;
 
@@ -53,7 +54,20 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     RadioButton green;
     @FXML
     RadioButton blue;
-    
+
+    @FXML
+    RadioButton oval;
+    @FXML
+    RadioButton rectangle;
+    @FXML
+    RadioButton star;
+    @FXML
+    RadioButton wave;
+    @FXML
+    RadioButton diamond;
+    @FXML
+    RadioButton heart;
+
     @FXML
     Button deletePlayer1;
     @FXML
@@ -62,7 +76,7 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     Button deletePlayer3;
     @FXML
     Button deletePlayer4;
-    
+
     @FXML
     Button addPlayer1;
     @FXML
@@ -72,14 +86,15 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     @FXML
     Button addPlayer4;
 
-
     final ToggleGroup group = new ToggleGroup();
 
     ScreenController controller;
 
     private String colour;
-    
+
     private boolean cpu;
+
+    private String[] symbols = new String[3];
 
     public ConfigurationMenuController() {
 
@@ -147,36 +162,82 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     public void deletePlayer4() {
         player4Name.setText(" ");
     }
-    
-    public void setCPU(){
-        if(cpu == true){
+
+    public void setSymbol(ActionEvent event) {
+        RadioButton btn = (RadioButton) event.getSource();
+        String symbol = btn.getId();
+        System.out.println(symbol);
+        if (btn.isSelected()) {
+            System.out.println("is selected");
+            if(!checkSymbolCount()){
+                btn.setSelected(false);
+            }else{
+                for (int i = 0; i < symbols.length; i++) {
+                    if (symbols[i] == null) {
+                        symbols[i] = symbol;
+                        i = 3;
+                    }   
+                }
+            }
+        }
+
+        else if (!btn.isSelected()) {
+            
+            for (int i = 0; i < symbols.length; i++) {
+                System.out.println("no selected");
+                    if(symbols[i] == null){
+                        
+                    }
+                    else if (symbols[i].equals(symbol)) {
+                        symbols[i] = null;
+                    }   
+                }
+        }
+       
+            System.out.println(symbols[0]);
+            System.out.println(symbols[1]);
+            System.out.println(symbols[2]);
+        
+    }
+
+    public boolean checkSymbolCount() {
+        for (int i = 0; i < symbols.length; i++) {
+            if (symbols[i] == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void setCPU() {
+        if (cpu == true) {
             cpu = false;
-        }else{
+        } else {
             cpu = true;
         }
-        
+
         player2Name.setText("CPU");
         player3Name.setDisable(cpu);
         player4Name.setDisable(cpu);
-        
+
         player2Textarea.setDisable(cpu);
         player3Textarea.setDisable(cpu);
         player4Textarea.setDisable(cpu);
-        
+
         deletePlayer2.setDisable(cpu);
         deletePlayer3.setDisable(cpu);
         deletePlayer4.setDisable(cpu);
-        
+
         addPlayer2.setDisable(cpu);
         addPlayer3.setDisable(cpu);
         addPlayer4.setDisable(cpu);
-        
+
         deletePlayer3();
         deletePlayer4();
-        
-        if(cpu == true){
+
+        if (cpu == true) {
             cpuLabel.setText("CPU!");
-        }else {
+        } else {
             cpuLabel.setText(" ");
             cpuLabel.setDisable(true);
         }
@@ -195,6 +256,31 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         player3Name.setText(configurator.getPlayer3Name());
         player4Name.setText(configurator.getPlayer4Name());
 
+        symbols[0] = configurator.getSymbol1();
+        symbols[1] = configurator.getSymbol2();
+        symbols[2] = configurator.getSymbol3();
+
+        for (int i = 0; i <= 2; i++) {
+            if (symbols[i].equals("rectangle")) {
+                rectangle.setSelected(true);
+            }
+            if (symbols[i].equals("oval")) {
+                oval.setSelected(true);
+            }
+            if (symbols[i].equals("wave")) {
+                wave.setSelected(true);
+            }
+            if (symbols[i].equals("star")) {
+                star.setSelected(true);
+            }
+            if (symbols[i].equals("heart")) {
+                heart.setSelected(true);
+            }
+            if (symbols[i].equals("diamond")) {
+                diamond.setSelected(true);
+            }
+        }
+
         colour = configurator.getColour();
         if (colour.equals("all")) {
             allColoursSelected();
@@ -209,8 +295,8 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         if (colour.equals("green")) {
             green.setSelected(true);
         }
-        
-        if(configurator.getCPU() == "true"){
+
+        if (configurator.getCPU() == "true") {
             cpu = false;
         }
         setCPU();
@@ -219,6 +305,10 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     public void saveConfiguration() {
         Configurator configurator = new Configurator();
 
+        for (int i = 0; i >= 6; i++) {
+
+        }
+
         configurator.setColour(colour);
 
         configurator.setPlayer1Name(player1Name.getText());
@@ -226,13 +316,13 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         configurator.setPlayer3Name(player3Name.getText());
         configurator.setPlayer4Name(player4Name.getText());
 
-        configurator.setSymbol1("rectangle");
-        configurator.setSymbol2("oval");
-        configurator.setSymbol3("wave");
-        
-        if(cpu == true){
+        configurator.setSymbol1(symbols[0]);
+        configurator.setSymbol2(symbols[1]);
+        configurator.setSymbol3(symbols[2]);
+
+        if (cpu == true) {
             configurator.setCPU("true");
-        }else{
+        } else {
             configurator.setCPU("false");
         }
 
