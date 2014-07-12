@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -34,6 +35,8 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     Label player3Name;
     @FXML
     Label player4Name;
+    @FXML
+    Label cpuLabel;
 
     @FXML
     TextField player1Textarea;
@@ -50,12 +53,33 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     RadioButton green;
     @FXML
     RadioButton blue;
+    
+    @FXML
+    Button deletePlayer1;
+    @FXML
+    Button deletePlayer2;
+    @FXML
+    Button deletePlayer3;
+    @FXML
+    Button deletePlayer4;
+    
+    @FXML
+    Button addPlayer1;
+    @FXML
+    Button addPlayer2;
+    @FXML
+    Button addPlayer3;
+    @FXML
+    Button addPlayer4;
+
 
     final ToggleGroup group = new ToggleGroup();
 
     ScreenController controller;
 
     private String colour;
+    
+    private boolean cpu;
 
     public ConfigurationMenuController() {
 
@@ -123,6 +147,40 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     public void deletePlayer4() {
         player4Name.setText(" ");
     }
+    
+    public void setCPU(){
+        if(cpu == true){
+            cpu = false;
+        }else{
+            cpu = true;
+        }
+        
+        player2Name.setDisable(cpu);
+        player3Name.setDisable(cpu);
+        player4Name.setDisable(cpu);
+        
+        player2Textarea.setDisable(cpu);
+        player3Textarea.setDisable(cpu);
+        player4Textarea.setDisable(cpu);
+        
+        deletePlayer2.setDisable(cpu);
+        deletePlayer3.setDisable(cpu);
+        deletePlayer4.setDisable(cpu);
+        
+        addPlayer2.setDisable(cpu);
+        addPlayer3.setDisable(cpu);
+        addPlayer4.setDisable(cpu);
+        
+        deletePlayer2();
+        deletePlayer3();
+        deletePlayer4();
+        
+        if(cpu == true){
+            cpuLabel.setText("CPU!");
+        }else {
+            cpuLabel.setText(" ");
+        }
+    }
 
     public void loadDefaults() {
         loadConfiguration("src/config/defaultConfig.properties");
@@ -151,6 +209,11 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         if (colour.equals("green")) {
             green.setSelected(true);
         }
+        
+        if(configurator.getCPU() == "true"){
+            cpu = false;
+        }
+        setCPU();
     }
 
     public void saveConfiguration() {
@@ -166,6 +229,12 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         configurator.setSymbol1("rectangle");
         configurator.setSymbol2("oval");
         configurator.setSymbol3("wave");
+        
+        if(cpu == true){
+            configurator.setCPU("true");
+        }else{
+            configurator.setCPU("false");
+        }
 
         configurator.writeConfiguration();
         //reload game view

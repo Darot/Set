@@ -5,7 +5,12 @@
  */
 package set.controller;
 
+import com.google.gson.Gson;
 import interfaces.controller.ControlledScreen;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.Arrays;
@@ -87,6 +92,8 @@ public class GameController implements Initializable, ControlledScreen {
     
     @FXML
     private Button start;
+    @FXML
+    private Button load;
     @FXML 
     private Label cardCount;
     
@@ -121,17 +128,6 @@ public class GameController implements Initializable, ControlledScreen {
     }
 
     public GameController() {
-
-    }
-
-    /**
-     *      EVENTHANDLER
-     */
-    
-    //Prepare everything for a Game 
-    public void initGame(ActionEvent event) throws Exception {
-        String imgPath = null;
-        Image img = null;
         Configurator config = new Configurator();
         config.loadConfiguration("src/config/config.properties");
         
@@ -144,6 +140,18 @@ public class GameController implements Initializable, ControlledScreen {
         }
         
         game.shuffleCards();
+    }
+
+    /**
+     *      EVENTHANDLER
+     */
+    
+    //Prepare everything for a Game 
+    public void initGame() throws Exception {
+        String imgPath = null;
+        Image img = null;
+        Configurator config = new Configurator();
+        config.loadConfiguration("src/config/config.properties");
         
         cardPositions = new ImageView[16];
         cards = new GameCard[16];
@@ -205,6 +213,8 @@ public class GameController implements Initializable, ControlledScreen {
 
         //desable start button to prevent another initialisation
         start.setDisable(true);
+        //desable load button to prevent another initialisation
+        load.setDisable(true);
         //initialize sound model
         soundPlayer.playCardSound();
         cardCount.setText("" + game.getCardCount());
@@ -388,6 +398,43 @@ public class GameController implements Initializable, ControlledScreen {
         }
         System.out.println("Set detected!");
         return true;
+    }
+    
+    /*
+    *   LOADING AND SAVING
+    */
+    
+    public void saveGame(){
+        int cardsOnTable = 0;
+        for(int i = 0; i < cardPositions.length; i++){
+            if(cardPositions[i] != null){
+                cardsOnTable++;
+            }
+        }
+        
+        game.addCardCounter(cardsOnTable);
+        
+        Gson gson = new Gson();
+        String json = gson.toJson(game);
+        
+        try {
+            FileWriter writer = new FileWriter("src/save/save.json");
+            writer.write(json);
+            writer.close();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void loadGame() throws Exception{
+        Gson gson = new Gson();
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("src/save/save.json"));
+            game = gson.fromJson(reader, Game.class);
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        initGame();
     }
 
     

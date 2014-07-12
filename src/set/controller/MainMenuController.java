@@ -48,6 +48,7 @@ public class MainMenuController implements Initializable, ControlledScreen {
         controller.setScreen(Set.GAME);
     }
     
+    
     @Override
     public void exitGame(){
         System.out.println("not implemented yet!");

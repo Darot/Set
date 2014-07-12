@@ -103,4 +103,8 @@ public class Game {
             cards[i] = rndCard;
         }
     }
+    
+    public void addCardCounter(int count){
+        cardCounter = cardCounter + count;
+    }
 }

@@ -112,5 +112,7 @@
       <Label id="player2Points" layoutX="707.0" layoutY="22.0" styleClass="player3" text="0" />
       <Label id="player3Points" layoutX="842.0" layoutY="22.0" styleClass="player4" text="0" />
       <Label id="cardCount" fx:id="cardCount" layoutX="278.0" layoutY="428.0" styleClass="player1" text="69" />
+      <Button id="load" fx:id="load" layoutX="624.0" layoutY="953.0" mnemonicParsing="false" onAction="#loadGame" text="Load" />
+      <Button id="save" fx:id="save1" layoutX="833.0" layoutY="955.0" mnemonicParsing="false" onAction="#saveGame" text="save" />
    </children>
 </AnchorPane>

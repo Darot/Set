@@ -29,6 +29,8 @@ public class Configurator {
     private String symbol1 = "rectangel";
     private String symbol2 = "oval";
     private String symbol3 = "wave";
+    
+    private String cpu = "false";
     //
 
     public void loadConfiguration(String path) {
@@ -73,6 +75,8 @@ public class Configurator {
             properties.setProperty("symbol2", symbol2);
             properties.setProperty("symbol3", symbol3);
 
+            properties.setProperty("cpu", cpu);
+            
             FileWriter writer = new FileWriter(configFile);
             properties.store(writer, "GameSetup");
             writer.close();
@@ -193,5 +197,19 @@ public class Configurator {
      */
     public void setColour(String colour) {
         this.colour = colour;
+    }
+
+    /**
+     * @return the cpu
+     */
+    public String getCPU() {
+        return cpu;
+    }
+
+    /**
+     * @param cpu the cpu to set
+     */
+    public void setCPU(String cpu) {
+        this.cpu = cpu;
     }
 }
