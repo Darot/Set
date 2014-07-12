@@ -178,6 +178,7 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
             cpuLabel.setText("CPU!");
         }else {
             cpuLabel.setText(" ");
+            cpuLabel.setDisable(true);
         }
     }
 

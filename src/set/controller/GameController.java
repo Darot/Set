@@ -122,6 +122,31 @@ public class GameController implements Initializable, ControlledScreen {
 
     ScreenController controller;
     SoundPlayer soundPlayer = new SoundPlayer();
+    
+    private Task<Void> task = new Task<Void>(){
+
+                @Override
+                protected Void call() throws Exception {
+                    System.out.println("Background task started...");
+                    while(true){
+                        System.out.println("loop!");
+                        Thread.sleep(1000);
+                        //Thread.sleep(5);
+                        Platform.runLater(new Runnable(){
+
+                            @Override
+                            public void run() {
+                                cpuMakeSet();
+                            }
+                            
+                        });
+                       
+                    }
+                }
+                
+            };
+    
+    private Thread th = new Thread(task);
 
     /**
      * Initializes the controller class.
@@ -225,14 +250,11 @@ public class GameController implements Initializable, ControlledScreen {
         
         System.out.println(config.getCPU());
         if(config.getCPU().equals("true")){
-            Task<Void> task = new Task<Void>(){
-
-                @Override
-                protected Void call() throws Exception {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-                
-            };
+            
+            
+            th.setDaemon(true);
+            System.out.println("starting background task ...");
+            th.start();
         }
     }
 
@@ -413,11 +435,17 @@ public class GameController implements Initializable, ControlledScreen {
         return freePositions;
     }
     
-    public void cpuMakeSet() throws Exception{
+    public boolean cpuMakeSet() {
         int[] cardPositions = getNextSet();
         removeUsedCards(cardPositions[0], cardPositions[1], cardPositions[2]);
-        addCards(3);
+        
+        try {
+            addCards(3);
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
         addPoint(1);
+        return true;
     } 
     
     /*
@@ -487,10 +515,12 @@ public class GameController implements Initializable, ControlledScreen {
      *      NAVIGATION
      */
     public void goToMain(ActionEvent event) {
+        th.stop();
         controller.setScreen(Set.MAIN_MENU);
     }
 
     public void gameEnd() throws Exception {
+        th.stop();
         //Find winner(s)
         String[] winners = new String[4];
         int wCount = 0;
