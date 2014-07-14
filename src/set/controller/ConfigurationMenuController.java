@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package set.controller;
 
 import interfaces.controller.ControlledScreen;
@@ -24,7 +20,12 @@ import set.services.Configurator;
 /**
  * FXML Controller class
  *
- * @author zeus
+ * @author Sebastian Neiss
+ * 
+ * This class controlls all elements of the configuration View.
+ * The configuration service is used to store thos configurations
+ * in a properties file with the properties API.
+ * 
  */
 public class ConfigurationMenuController implements Initializable, ControlledScreen {
 
@@ -86,6 +87,7 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     @FXML
     Button addPlayer4;
 
+    //the toggle group for color selection radio buttons
     final ToggleGroup group = new ToggleGroup();
 
     ScreenController controller;
@@ -96,10 +98,6 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
 
     private String[] symbols = new String[3];
 
-    public ConfigurationMenuController() {
-
-    }
-
     /**
      * Initializes the controller class.
      */
@@ -108,9 +106,14 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         red.setToggleGroup(group);
         blue.setToggleGroup(group);
         green.setToggleGroup(group);
+        //load the configuration -> this will set all GUI elements
         loadConfiguration("src/config/config.properties");
     }
 
+    /**
+     * This method handles the selection of a color.
+     * Its called when a button of a color is clicked.
+    */
     public void colourSelected(ActionEvent event) {
         red.setToggleGroup(group);
         blue.setToggleGroup(group);
@@ -121,6 +124,11 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
 
     }
 
+    /**
+     * This method will be called when the "ALL COLORS" button
+     * is clicked.
+     * It removes the radio buttons from the toggle group.
+    */
     public void allColoursSelected() {
         red.setToggleGroup(null);
         blue.setToggleGroup(null);
@@ -131,6 +139,9 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         colour = "all";
     }
 
+    /**
+     * add / remove players
+     */
     public void addPlayer1() {
         player1Name.setText(player1Textarea.getText());
     }
@@ -163,6 +174,12 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         player4Name.setText(" ");
     }
 
+    /**
+     * This is weird algorithm to guarantee the user has to pick exact 3
+     * symbols. (toggle groups do not have a feature like that)
+     * 
+     * @param event 
+     */
     public void setSymbol(ActionEvent event) {
         RadioButton btn = (RadioButton) event.getSource();
         String symbol = btn.getId();
@@ -193,13 +210,14 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
                     }   
                 }
         }
-       
-            System.out.println(symbols[0]);
-            System.out.println(symbols[1]);
-            System.out.println(symbols[2]);
         
     }
 
+    /**
+     * Checks if there are symbols left to pick.
+     * 
+     * @return true / false
+     */
     public boolean checkSymbolCount() {
         for (int i = 0; i < symbols.length; i++) {
             if (symbols[i] == null) {
@@ -209,6 +227,10 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         return false;
     }
 
+    /**
+     * Handles the "Play against cpu" button and deactivates all other
+     * players when clicked.
+     */
     public void setCPU() {
         if (cpu == true) {
             cpu = false;
@@ -243,13 +265,24 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         }
     }
 
+    /**
+     * Loads default settings file
+     */
     public void loadDefaults() {
         loadConfiguration("src/config/defaultConfig.properties");
     }
 
+    
+    /**
+     * Loads a give configuration file and sets all GUI Elements to
+     * the loaded values
+     * 
+     * @param path 
+     */
     private void loadConfiguration(String path) {
         Configurator configurator = new Configurator();
         configurator.loadConfiguration(path);
+        
         //Set loaded values
         player1Name.setText(configurator.getPlayer1Name());
         player2Name.setText(configurator.getPlayer2Name());
@@ -260,6 +293,8 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         symbols[1] = configurator.getSymbol2();
         symbols[2] = configurator.getSymbol3();
 
+        
+        //ToDo : This could be better!?
         for (int i = 0; i <= 2; i++) {
             if (symbols[i].equals("rectangle")) {
                 rectangle.setSelected(true);
@@ -285,7 +320,6 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         if (colour.equals("all")) {
             allColoursSelected();
         }
-        //ToDo : This could be better!?
         if (colour.equals("red")) {
             red.setSelected(true);
         }
@@ -302,6 +336,9 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         setCPU();
     }
 
+    /**
+     * Saves the configuration to a properties file.
+     */
     public void saveConfiguration() {
         Configurator configurator = new Configurator();
 
@@ -332,12 +369,21 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
         controller.loadScreen(Set.GAME, Set.GAME_FXML);
     }
 
+    /**
+     * Injects the screen parent.
+     * 
+     * @param screenParent 
+     */
     @Override
     public void setScreenParent(ScreenController screenParent) {
 
         controller = screenParent;
     }
 
+    /**
+     * Navigation 
+     */
+    
     public void goToMain(ActionEvent event) {
 
         controller.setScreen(Set.MAIN_MENU);

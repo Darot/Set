@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package set.controller;
 
 import com.google.gson.Gson;
@@ -123,6 +118,10 @@ public class GameController implements Initializable, ControlledScreen {
     ScreenController controller;
     SoundPlayer soundPlayer = new SoundPlayer();
     
+    /**
+     * This task will be used if playing against the computer
+     * is activated to run the bot in a background thread.
+     */
     private Task<Void> task = new Task<Void>(){
 
                 @Override
@@ -156,6 +155,9 @@ public class GameController implements Initializable, ControlledScreen {
         
     }
 
+    /**
+     * Loads the configurations and initializes model classes.
+     */
     public GameController() {
         Configurator config = new Configurator();
         config.loadConfiguration("src/config/config.properties");
@@ -175,7 +177,9 @@ public class GameController implements Initializable, ControlledScreen {
      *      EVENTHANDLER
      */
     
-    //Prepare everything for a Game 
+    /**
+     * Prepare everything for a Game 
+     */
     public void initGame() throws Exception {
         String imgPath = null;
         Image img = null;
@@ -258,9 +262,9 @@ public class GameController implements Initializable, ControlledScreen {
         }
     }
 
-    /*
-    This method sets the set variable to the players id who klicke SET
-    if no other player klicked fist
+    /**
+    *This method sets the set variable to the players id who clicked SET
+    *if no other player clicked first.
     */
     public void setClicked(ActionEvent event) {
         Button btn = (Button) event.getSource();
@@ -273,8 +277,8 @@ public class GameController implements Initializable, ControlledScreen {
         }
     }
 
-    /*
-    This method handles the card selection for a SET after the SET button was klicked
+    /**
+    * This method handles the card selection for a SET after the SET button was clicked.
     */
     public void cardClicked(MouseEvent event) throws Exception{
 
@@ -316,8 +320,8 @@ public class GameController implements Initializable, ControlledScreen {
      *      GAMEMANAGEMENT
      */
     
-    /*
-    This method removes all cards after they have been use for a Set
+    /**
+    * This method removes all cards after they have been used for a Set
     */
     public void removeUsedCards(int pos1, int pos2, int pos3) {
         //Remove the Images from the view
@@ -332,8 +336,8 @@ public class GameController implements Initializable, ControlledScreen {
         cards[pos3] = null;
     }
 
-    /*
-    Adds Cards to the View if there are Cards left (81)
+    /**
+    * Adds Cards to the View if there are Cards left (81)
     */
     public void addCards(int amount) throws Exception{
         //if there are no cards left -> Game is over!
@@ -360,8 +364,8 @@ public class GameController implements Initializable, ControlledScreen {
         cardCount.setText("" + game.getCardCount());
     }
 
-    /*
-    Adds a point if a player found a SET
+    /**
+    * Adds a point if a player found a SET
     */
     public void addPoint(int playerId) {
         players[playerId].addPoint();
@@ -370,8 +374,8 @@ public class GameController implements Initializable, ControlledScreen {
         label.setText("" + players[playerId].getPoints());
     }
 
-    /*
-    Loops through all displayed cards an checks if there is a SET
+    /**
+    * Loops through all displayed cards an checks if there is a SET
     */
     public boolean checkForSet() {
 
@@ -392,6 +396,12 @@ public class GameController implements Initializable, ControlledScreen {
         return false;
     }
     
+    /**
+     * Searches for a SET in the displayed cards an returns an array
+     * with the positions of the cards.
+     * 
+     * @return array 
+     */
     public int[] getNextSet() {
         int[] cardPositions = new int[3];
         for (int ai = 0; ai < cards.length; ai++) {
@@ -414,8 +424,8 @@ public class GameController implements Initializable, ControlledScreen {
         return cardPositions;
     }
     
-    /*
-    Retruns the number of free positions for cards
+    /**
+    * Returns the number of free positions for cards.
     */
     public int checkFreePositions(){
         int freePositions = 0;
@@ -435,6 +445,14 @@ public class GameController implements Initializable, ControlledScreen {
         return freePositions;
     }
     
+    
+    /**
+     * This method will be called periodically by the subthread of the "bot".
+     * It searches for a set. Removes the cards from the table an gets a point 
+     * for cpu.
+     * 
+     * @return true;
+     */
     public boolean cpuMakeSet() {
         int[] cardPositions = getNextSet();
         removeUsedCards(cardPositions[0], cardPositions[1], cardPositions[2]);
@@ -448,8 +466,8 @@ public class GameController implements Initializable, ControlledScreen {
         return true;
     } 
     
-    /*
-    Checks if the given cards are a SET
+    /**
+    * Checks if the given cards are a SET.
     */
     public boolean isSet(GameCard c1, GameCard c2, GameCard c3) {
 
@@ -477,6 +495,10 @@ public class GameController implements Initializable, ControlledScreen {
     *   LOADING AND SAVING
     */
     
+    
+    /**
+     * Uses googles Gson API to stores the current Gamemodel in a JSON File.  
+     */
     public void saveGame(){
         int cardsOnTable = 0;
         for(int i = 0; i < cardPositions.length; i++){
@@ -500,6 +522,11 @@ public class GameController implements Initializable, ControlledScreen {
         }
     }
     
+    /**
+     * Uses googles Gson API to load a saved Game model from a JSON file.
+     * 
+     * @throws IOException 
+     */
     public void loadGame() throws Exception{
         Gson gson = new Gson();
         try{
@@ -520,6 +547,12 @@ public class GameController implements Initializable, ControlledScreen {
         controller.setScreen(Set.MAIN_MENU);
     }
 
+    /**
+     * Will be called when there are no cards and sets left, stops
+     * subthread and creates the winner-screen.
+     * 
+     * @throws Exception 
+     */
     public void gameEnd() throws Exception {
         th.stop();
         //Find winner(s)

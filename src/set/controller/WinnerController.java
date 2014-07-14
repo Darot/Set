@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package set.controller;
 
@@ -16,7 +11,7 @@ import set.model.SoundPlayer;
 /**
  * FXML Controller class
  *
- * @author zeus
+ * @author Sebastian Neiss
  */
 public class WinnerController implements Initializable {
 
@@ -37,6 +32,13 @@ public class WinnerController implements Initializable {
         controller = screenParent;
     }
     
+    /**
+     * This method is used to inject data from other controllers
+     * like the game controller. 
+     * The information about the winner(s) will be injected here.
+     * 
+     * @param winners 
+     */
     public void initData (String[] winners){
        String winnerText = "";
         for(int i = 0; i < winners.length; i++){

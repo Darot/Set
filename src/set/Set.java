@@ -23,6 +23,7 @@ public class Set extends Application {
     //View Configuration
     public static final String PATH_PREFIX ="/set/view/";
     
+    //All screens and their FXML pathes
     public static final String SPLASH_SCREEN = "splash";
     public static final String SPLASH_SCREEN_FXML = PATH_PREFIX + "splash.fxml";
     public static final String MAIN_MENU =  "main";
@@ -38,7 +39,11 @@ public class Set extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
+        /*
+        * Initializes the JavaFX content
+        */
         
+        //create a screen controller instance and pass all view to load
         ScreenController mainContainer = new ScreenController();
         mainContainer.loadScreen(Set.SPLASH_SCREEN, Set.SPLASH_SCREEN_FXML);
         mainContainer.loadScreen(Set.MAIN_MENU, Set.MAIN_MENU_FXML);
@@ -46,6 +51,7 @@ public class Set extends Application {
         mainContainer.loadScreen(Set.LOAD_GAME, Set.LOAD_GAME_FXML);
         mainContainer.loadScreen(Set.GAME, Set.GAME_FXML);
         
+        //set the splash screen as first screen
         mainContainer.setScreen(Set.SPLASH_SCREEN);
         
         Group root = new Group();

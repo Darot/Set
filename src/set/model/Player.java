@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package set.model;
 
 /**
- *
- * @author Daniel
+ * The Player model
+ * 
+ * @author Sebastian Neiss
  */
 public class Player {
     
@@ -19,19 +15,28 @@ public class Player {
         this.name = name;
     }
     
+    /**
+     * Adds a point (used if player finds a set).
+     */
     public void addPoint(){
         points ++;
     }
     
+    /**
+     * @return points
+     */
     public int getPoints(){
         return points;
     }
+    
     
     public void setName(String name){
         this.name = name;
     }
 
-    
+    /**
+     * @return name
+     */
     public String getName(){
         return name;
     }

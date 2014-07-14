@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package set.model;
 
 import java.util.Random;
 import set.services.Configurator;
 
 /**
+ * This is the game model - it contains all information about the game.
  *
- * @author zeus
+ * @author Sebastian Neiss / Daniel Roth
  */
 public class Game {
 
@@ -22,6 +18,9 @@ public class Game {
     public Player player3;
     public Player player4;
 
+    /**
+     * Get configurated players an initialize them
+     */
     public Game() {
         Configurator configurator = new Configurator();
         configurator.loadConfiguration("src/config/config.properties");
@@ -31,20 +30,31 @@ public class Game {
         player4 = new Player(configurator.getPlayer4Name());
     }
 
+    /**
+     * @return amount of left cards
+     */
     public int getCardCount() {
         return cardCounter;
     }
 
+    /**
+     * @return generated cards
+     */
     public GameCard[] getCards() {
         return cards;
     }
 
+    /**
+     * @return next card in the card-arrays
+     */
     public GameCard pickCard() {
         cardCounter--;
         return cards[cardCounter];
     }
 
-    //Initializes all GameCards with the symbols with the setup, the client has chosen.
+    /**
+     * Initializes all GameCards with the symbols the client has chosen.
+     */
     public void generateCards(String symbol1, String symbol2, String symbol3, String colour1, String colour2, String colour3) {
         cards = new GameCard[81];
         String[] symbols = {symbol1, symbol2, symbol3};
@@ -58,10 +68,10 @@ public class Game {
             for (int k = 0; k <= colours.length - 1; k++) { // 3 loops for colours
                 for (int j = 0; j <= 2; j++) { //3 loops for shadings
                     for (int l = 0; l <= 2; l++) {//3 loops for numbers
-                            card = new GameCard(colours[k], shadings[j], symbols[i], l + 1);
-                            cards[cardNr] = card;
-                            cardNr++;
-                            cardCounter++;
+                        card = new GameCard(colours[k], shadings[j], symbols[i], l + 1);
+                        cards[cardNr] = card;
+                        cardNr++;
+                        cardCounter++;
                     }
                 }
 
@@ -69,8 +79,11 @@ public class Game {
         }
         System.out.println(cardCounter);
     }
-    
-        public void generateCards(String symbol1, String symbol2, String symbol3, String colour) {
+
+    /**
+     * Initializes all GameCards with the symbols the client has chosen (for only one color).
+     */
+    public void generateCards(String symbol1, String symbol2, String symbol3, String colour) {
         cards = new GameCard[27];
         String[] symbols = {symbol1, symbol2, symbol3};
         String[] shadings = {"open", "solid", "striped"};
@@ -79,19 +92,21 @@ public class Game {
         int cardNr = 0;
 
         for (int i = 0; i <= symbols.length - 1; i++) { // 3 loops for symbols
-                for (int j = 0; j <= 2; j++) { //3 loops for shadings
-                    for (int l = 0; l <= 2; l++) {//3 loops for numbers
-                            card = new GameCard(colour, shadings[j], symbols[i], l + 1);
-                            cards[cardNr] = card;
-                            cardNr++;
-                            cardCounter++;
-                    }
+            for (int j = 0; j <= 2; j++) { //3 loops for shadings
+                for (int l = 0; l <= 2; l++) {//3 loops for numbers
+                    card = new GameCard(colour, shadings[j], symbols[i], l + 1);
+                    cards[cardNr] = card;
+                    cardNr++;
+                    cardCounter++;
                 }
+            }
         }
         System.out.println(cardCounter);
     }
 
-    //this method is used du shuffle the cards
+    /**
+     * this method is used to shuffle the cards.
+     */
     public void shuffleCards() {
         Random rnd = new Random();
 
@@ -103,8 +118,12 @@ public class Game {
             cards[i] = rndCard;
         }
     }
-    
-    public void addCardCounter(int count){
+
+    /**
+     * Adds the count of the cards on the table (used for saving the game).
+     * @param count 
+     */
+    public void addCardCounter(int count) {
         cardCounter = cardCounter + count;
     }
 }

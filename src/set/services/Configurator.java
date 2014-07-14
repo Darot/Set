@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package set.services;
 
 import java.io.File;
@@ -13,8 +9,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- *
- * @author Daniel Roth
+ * This is a service that loads and saves configuration-variables
+ * to a properties file.
+ * 
+ * @author Sebastian Neiss
  */
 public class Configurator {
 
@@ -33,6 +31,12 @@ public class Configurator {
     private String cpu = "false";
     //
 
+    
+    /**
+     * Loads the configuration parameters from a given file.
+     * 
+     * @param path 
+     */
     public void loadConfiguration(String path) {
         File configFile = new File(path);
         try {
@@ -61,6 +65,10 @@ public class Configurator {
 
     }
 
+    
+    /**
+     * Stores the selected options to a properties file.
+     */
     public void writeConfiguration() {
         File configFile = new File("src/config/config.properties");
         try {

@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package set.model;
 
 import java.net.URL;
 import javafx.scene.media.AudioClip;
 
 /**
- *
+ * This class provides sounds.
+ * Every method will play a sound when called.
+ * 
  * @author daniel
  */
 public class SoundPlayer {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package set.controller;
 
@@ -15,8 +10,10 @@ import set.Set;
 
 /**
  * FXML Controller class
+ * 
+ * Nothing to tell about - just a view with a button.
  *
- * @author zeus
+ * @author Sebastian Neiss
  */
 public class SplashController implements Initializable, ControlledScreen {
     

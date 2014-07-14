@@ -9,8 +9,9 @@ import java.util.Arrays;
 import interfaces.model.Cards;
 
 /**
- *
- * @author zeus
+ * This is the card model it contains all information about a card.
+ * 
+ * @author Sebastian Neiss / Daniel Roth
  */
 public class GameCard implements Cards {
 
@@ -32,16 +33,27 @@ public class GameCard implements Cards {
         this.number = number;
     }
 
+    /**
+     * this method is not used anymore. (ToDo: Delete!?)
+     * @return selected
+     */
     @Override
     public boolean isSelected() {
         return selected;
     }
 
+    /**
+     * this method is not used anymore. (ToDo: Delete!?)
+     * @param selected (true / false)
+     */
     @Override
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
+    /**
+     * @return colour
+     */
     @Override
     public String getColour() {
         return colour;
@@ -54,6 +66,9 @@ public class GameCard implements Cards {
         }
     }
 
+    /**
+     * @return padding
+     */
     @Override
     public String getPadding() {
         return padding;
@@ -66,6 +81,9 @@ public class GameCard implements Cards {
         }
     }
 
+    /**
+     * @return symbol
+     */
     @Override
     public String getSymbol() {
         return symbol;
@@ -78,6 +96,9 @@ public class GameCard implements Cards {
         }
     }
 
+    /**
+     * @return path to card image
+     */
     @Override
     public String getImagePath() {
         String path = "/resources/cards/" + colour + "-" + padding + "-" + symbol + "-" + number + ".jpg";
@@ -85,6 +106,9 @@ public class GameCard implements Cards {
         return path;
     }
 
+    /**
+     * @return number
+     */
     @Override
     public int getNumber() {
         return number;

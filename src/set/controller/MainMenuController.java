@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package set.controller;
 
 import interfaces.controller.ControlledScreen;
@@ -15,7 +11,7 @@ import set.Set;
 /**
  * FXML Controller class
  *
- * @author zeus
+ * @author Sebastian Neiss
  */
 public class MainMenuController implements Initializable, ControlledScreen {
 

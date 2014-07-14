@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package set.controller;
 
 
@@ -21,21 +17,44 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 /**
- *
- * @author zeus
+ * This is the Screen controller witch generates and controls
+ * our stack-pane.
+ * 
+ * @author Daniel Roth
  */
 public class ScreenController extends StackPane {
 
     private HashMap<String, Node> screens = new HashMap<>();
 
+    /**
+     * Stores a screen to the HashMap.
+     * 
+     * @param name
+     * @param screen 
+     */
     public void addScreen(String name, Node screen) {
         screens.put(name, screen);
     }
     
+    
+    /**
+     * A Getter method that is actually not used but i thought it could
+     * be useful anytime.
+     * 
+     * @param name
+     * @return loaded screen
+     */
     public Object getScreen(String name){
         return screens.get(name);
     }
 
+    /**
+     * Loads a screen, initializes it and stores it into a HashMap.
+     * 
+     * @param name (of the screen)
+     * @param resource (FXML Path)
+     * @return true / false
+     */
     public boolean loadScreen(String name, String resource) {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
@@ -46,16 +65,20 @@ public class ScreenController extends StackPane {
             addScreen(name, loadScreen);
             return true;
         } catch (Exception e) {
-            System.out.println("error!");
+            System.out.println("Something went wrong! Check your controller -classes!!! \n "
+                    + "Are all handlers used in FXML defined?");
             System.out.println(e.getMessage());
             return false;
         }
     }
 
-    //This method tries to displayed the screen with a predefined name.
-    //First it makes sure the screen has been already loaded. Then if there is more than
-    //one screen the new screen is been added second, and then the current screen is removed.
-    // If there isn't any screen being displayed, the new screen is just added to the root.
+    /**
+     * This method tries to display the screen with a predefined name
+     * if it is already loaded.
+     * 
+     * @param screenname
+     * @return true / false
+     */
     public boolean setScreen(final String name) {
         if (screens.get(name) != null) { //screen loaded
             final DoubleProperty opacity = opacityProperty();
@@ -93,8 +116,10 @@ public class ScreenController extends StackPane {
     }
     
     
-    //This method simply removes a screen from the hashmap and reports the status of this 
-    //operation
+    /**
+     * This method simply removes a screen from the hashmap and reports the status of this 
+     *operation
+     */ 
     public boolean unloadScreen(String name) {
         if(screens.remove(name) ==  null){
             System.out.println("Screen didn't exist");
