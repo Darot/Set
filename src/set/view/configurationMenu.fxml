@@ -7,9 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/configuration.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.ConfigurationMenuController">
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/configuration.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.ConfigurationMenuController">
    <children>
-      <Button layoutX="17.0" layoutY="972.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
+      <Button layoutX="786.0" layoutY="608.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
       <TextField id="player2Textarea" fx:id="player2Textarea" layoutX="127.0" layoutY="190.0" onAction="#addPlayer2" styleClass="player2Textarea" />
       <TextField id="player3Textarea" fx:id="player3Textarea" layoutX="127.0" layoutY="254.0" onAction="#addPlayer3" styleClass="player3Textarea" />
       <TextField id="player1Textarea" fx:id="player1Textarea" layoutX="126.0" layoutY="127.0" onAction="#addPlayer1" styleClass="player1Textarea" />
@@ -27,8 +27,8 @@
       <Label id="player3Name" fx:id="player3Name" layoutX="352.0" layoutY="247.0" prefHeight="39.0" prefWidth="354.0" styleClass="player3Name" text="Label" />
       <Label id="player4Name" fx:id="player4Name" layoutX="352.0" layoutY="318.0" prefHeight="39.0" prefWidth="354.0" styleClass="player4Name" text="Label" />
       <Label layoutX="97.0" layoutY="387.0" prefHeight="36.0" prefWidth="171.0" styleClass="heading" text="Symbols:" />
-      <Button layoutX="514.0" layoutY="855.0" mnemonicParsing="false" onAction="#saveConfiguration" text="Save" />
-      <Button layoutX="711.0" layoutY="855.0" mnemonicParsing="false" onAction="#loadDefaults" text="Load Defaults" />
+      <Button layoutX="1037.0" layoutY="614.0" mnemonicParsing="false" onAction="#saveConfiguration" text="Save" />
+      <Button layoutX="1158.0" layoutY="615.0" mnemonicParsing="false" onAction="#loadDefaults" text="Load Defaults" />
       <Button fx:id="deletePlayer21" layoutX="299.0" layoutY="127.0" mnemonicParsing="false" onAction="#deletePlayer1" prefHeight="25.0" prefWidth="29.0" text="-" />
       <ImageView fitHeight="82.0" fitWidth="124.0" layoutX="100.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -67,13 +67,13 @@
          </image>
       </ImageView>
       <Label layoutX="97.0" layoutY="597.0" prefHeight="36.0" prefWidth="171.0" styleClass="heading" text="Colors:" />
-      <Label layoutX="96.0" layoutY="661.0" prefHeight="39.0" prefWidth="67.0" styleClass="red" text="Red" />
-      <Label layoutX="203.0" layoutY="661.0" prefHeight="39.0" prefWidth="108.0" styleClass="green" text="Green" />
-      <Label layoutX="339.0" layoutY="661.0" prefHeight="39.0" prefWidth="82.0" styleClass="blue" text="Blue" />
-      <RadioButton id="red" fx:id="red" layoutX="118.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton id="green" fx:id="green" layoutX="245.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
-      <RadioButton id="blue" fx:id="blue" layoutX="368.0" layoutY="709.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
-      <Button layoutX="447.0" layoutY="672.0" mnemonicParsing="false" onAction="#allColoursSelected" prefHeight="58.0" prefWidth="58.0" text="ALL" />
+      <Label layoutX="254.0" layoutY="597.0" prefHeight="39.0" prefWidth="67.0" styleClass="red" text="Red" />
+      <Label layoutX="352.0" layoutY="597.0" prefHeight="39.0" prefWidth="108.0" styleClass="green" text="Green" />
+      <Label layoutX="488.0" layoutY="597.0" prefHeight="39.0" prefWidth="82.0" styleClass="blue" text="Blue" />
+      <RadioButton id="red" fx:id="red" layoutX="276.0" layoutY="646.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="green" fx:id="green" layoutX="394.0" layoutY="646.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
+      <RadioButton id="blue" fx:id="blue" layoutX="517.0" layoutY="646.0" mnemonicParsing="false" onAction="#colourSelected" prefHeight="18.0" prefWidth="16.0" />
+      <Button layoutX="595.0" layoutY="597.0" mnemonicParsing="false" onAction="#allColoursSelected" prefHeight="58.0" prefWidth="58.0" text="ALL" />
       <Button layoutX="680.0" layoutY="164.0" mnemonicParsing="false" onAction="#setCPU" prefHeight="58.0" prefWidth="188.0" text="Play against Computer" />
       <Label fx:id="cpuLabel" layoutX="96.0" layoutY="182.0" prefHeight="186.0" prefWidth="239.0" styleClass="cpuLabel" />
    </children>

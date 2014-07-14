@@ -9,86 +9,85 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="1024.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.GameController">
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.GameController">
    <children>
-      <Button layoutX="15.0" layoutY="974.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
-      <Button layoutX="1139.0" layoutY="973.0" mnemonicParsing="false" onAction="#gameEnd" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
-      <Button id="start" fx:id="start" layoutX="624.0" layoutY="912.0" mnemonicParsing="false" onAction="#initGame" text="Start" />
-      <ImageView id="card14" fx:id="card15" fitHeight="178.0" fitWidth="148.0" layoutX="655.0" layoutY="679.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="1123.0" layoutY="617.0" mnemonicParsing="false" onAction="#gameEnd" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
+      <Button id="start" fx:id="start" layoutX="546.0" layoutY="652.0" mnemonicParsing="false" onAction="#initGame" text="Start" />
+      <ImageView id="card14" fx:id="card15" fitHeight="178.0" fitWidth="148.0" layoutX="938.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image></ImageView>
-      <ImageView id="card8" fx:id="card9" fitHeight="178.0" fitWidth="148.0" layoutX="374.0" layoutY="482.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card8" fx:id="card9" fitHeight="178.0" fitWidth="148.0" layoutX="374.0" layoutY="454.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card9" fx:id="card10" fitHeight="178.0" fitWidth="148.0" layoutX="512.0" layoutY="482.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card9" fx:id="card10" fitHeight="178.0" fitWidth="148.0" layoutX="512.0" layoutY="454.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card10" fx:id="card11" fitHeight="178.0" fitWidth="148.0" layoutX="656.0" layoutY="482.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card10" fx:id="card11" fitHeight="178.0" fitWidth="148.0" layoutX="656.0" layoutY="454.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card11" fx:id="card12" fitHeight="178.0" fitWidth="148.0" layoutX="797.0" layoutY="482.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card11" fx:id="card12" fitHeight="178.0" fitWidth="148.0" layoutX="797.0" layoutY="454.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card4" fx:id="card5" fitHeight="178.0" fitWidth="148.0" layoutX="374.0" layoutY="286.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
+      <ImageView id="card4" fx:id="card5" fitHeight="178.0" fitWidth="148.0" layoutX="374.0" layoutY="258.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card0" fx:id="card1" fitHeight="178.0" fitWidth="148.0" layoutX="374.0" layoutY="98.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
+      <ImageView id="card0" fx:id="card1" fitHeight="178.0" fitWidth="148.0" layoutX="374.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card5" fx:id="card6" fitHeight="178.0" fitWidth="148.0" layoutX="512.0" layoutY="286.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card5" fx:id="card6" fitHeight="178.0" fitWidth="148.0" layoutX="512.0" layoutY="258.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card6" fx:id="card7" fitHeight="178.0" fitWidth="148.0" layoutX="656.0" layoutY="286.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card6" fx:id="card7" fitHeight="178.0" fitWidth="148.0" layoutX="656.0" layoutY="258.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card1" fx:id="card2" fitHeight="178.0" fitWidth="148.0" layoutX="512.0" layoutY="98.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
+      <ImageView id="card1" fx:id="card2" fitHeight="178.0" fitWidth="148.0" layoutX="512.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card2" fx:id="card3" fitHeight="178.0" fitWidth="148.0" layoutX="656.0" layoutY="98.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
+      <ImageView id="card2" fx:id="card3" fitHeight="178.0" fitWidth="148.0" layoutX="656.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card3" fx:id="card4" fitHeight="178.0" fitWidth="148.0" layoutX="797.0" layoutY="98.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
+      <ImageView id="card3" fx:id="card4" fitHeight="178.0" fitWidth="148.0" layoutX="797.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true" styleClass="image">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card7" fx:id="card8" fitHeight="178.0" fitWidth="148.0" layoutX="797.0" layoutY="286.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card7" fx:id="card8" fitHeight="178.0" fitWidth="148.0" layoutX="797.0" layoutY="258.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card13" fx:id="card14" fitHeight="178.0" fitWidth="148.0" layoutX="513.0" layoutY="682.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card13" fx:id="card14" fitHeight="178.0" fitWidth="148.0" layoutX="232.0" layoutY="258.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card15" fx:id="card16" fitHeight="178.0" fitWidth="148.0" layoutX="795.0" layoutY="678.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card15" fx:id="card16" fitHeight="178.0" fitWidth="148.0" layoutX="938.0" layoutY="258.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
       </ImageView>
-      <ImageView id="card12" fx:id="card13" fitHeight="178.0" fitWidth="148.0" layoutX="376.0" layoutY="684.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="card12" fx:id="card13" fitHeight="178.0" fitWidth="148.0" layoutX="232.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/cards/card-back.jpg" />
          </image>
@@ -100,19 +99,19 @@
          <effect>
             <Bloom />
          </effect></Label>
-      <Label id="player4" fx:id="player4" layoutX="16.0" layoutY="901.0" prefHeight="59.0" prefWidth="149.0" styleClass="player4" text="Player 4" />
-      <Label id="player3" fx:id="player3" layoutX="1108.0" layoutY="895.0" prefHeight="59.0" prefWidth="149.0" styleClass="player3" text="Player 3" />
+      <Label id="player4" fx:id="player4" layoutX="29.0" layoutY="328.0" prefHeight="59.0" prefWidth="149.0" styleClass="player4" text="Player 4" />
+      <Label id="player3" fx:id="player3" layoutX="1113.0" layoutY="328.0" prefHeight="59.0" prefWidth="149.0" styleClass="player3" text="Player 3" />
       <Label id="player2" fx:id="player2" layoutX="1114.0" layoutY="8.0" prefHeight="59.0" prefWidth="149.0" styleClass="player2" text="Player 2" />
       <Button fx:id="setPlayer0" layoutX="34.0" layoutY="59.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
-      <Button fx:id="setPlayer1" layoutX="1138.0" layoutY="65.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
-      <Button fx:id="setPlayer3" layoutX="18.0" layoutY="838.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
-      <Button fx:id="setPlayer2" layoutX="1135.0" layoutY="820.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
+      <Button fx:id="setPlayer1" layoutX="1117.0" layoutY="65.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
+      <Button fx:id="setPlayer3" layoutX="32.0" layoutY="386.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
+      <Button fx:id="setPlayer2" layoutX="1116.0" layoutY="386.0" mnemonicParsing="false" onAction="#setClicked" prefHeight="65.0" prefWidth="112.0" styleClass="setButton" text="SET!" />
       <Label id="player0Points" layoutX="423.0" layoutY="23.0" styleClass="player1" text="0" />
       <Label id="player1Points" layoutX="564.0" layoutY="24.0" styleClass="player2" text="0" />
       <Label id="player2Points" layoutX="707.0" layoutY="22.0" styleClass="player3" text="0" />
       <Label id="player3Points" layoutX="842.0" layoutY="22.0" styleClass="player4" text="0" />
-      <Label id="cardCount" fx:id="cardCount" layoutX="278.0" layoutY="428.0" styleClass="player1" text="69" />
-      <Button id="load" fx:id="load" layoutX="624.0" layoutY="953.0" mnemonicParsing="false" onAction="#loadGame" text="Load" />
-      <Button id="save" fx:id="save1" layoutX="833.0" layoutY="955.0" mnemonicParsing="false" onAction="#saveGame" text="save" />
+      <Label id="cardCount" fx:id="cardCount" layoutX="278.0" layoutY="568.0" styleClass="player1" text="69" />
+      <Button id="load" fx:id="load" layoutX="624.0" layoutY="652.0" mnemonicParsing="false" onAction="#loadGame" text="Load" />
+      <Button id="save" fx:id="save1" layoutX="704.0" layoutY="652.0" mnemonicParsing="false" onAction="#saveGame" text="save" />
    </children>
 </AnchorPane>
