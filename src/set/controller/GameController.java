@@ -93,6 +93,8 @@ public class GameController implements Initializable, ControlledScreen {
     private Button start;
     @FXML
     private Button load;
+    @FXML
+    private Button back;
     @FXML 
     private Label cardCount;
     
@@ -243,10 +245,11 @@ public class GameController implements Initializable, ControlledScreen {
                 label.setText(players[i].getName());
             }
         }
-
-        //desable start button to prevent another initialisation
+        //disable back button
+        back.setDisable(true);
+        //disable start button to prevent another initialisation
         start.setDisable(true);
-        //desable load button to prevent another initialisation
+        //disable load button to prevent another initialisation
         load.setDisable(true);
         //initialize sound model
         soundPlayer.playCardSound();

@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="1280.0" styleClass="background" stylesheets="@css/default.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="set.controller.GameController">
    <children>
-      <Button layoutX="1123.0" layoutY="617.0" mnemonicParsing="false" onAction="#gameEnd" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
+      <Button layoutX="1123.0" layoutY="617.0" mnemonicParsing="false" onAction="#gameEnd" prefHeight="36.0" prefWidth="124.0" text="End Game" />
       <Button id="start" fx:id="start" layoutX="546.0" layoutY="652.0" mnemonicParsing="false" onAction="#initGame" text="Start" />
       <ImageView id="card14" fx:id="card15" fitHeight="178.0" fitWidth="148.0" layoutX="938.0" layoutY="70.0" onMouseClicked="#cardClicked" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -113,5 +113,6 @@
       <Label id="cardCount" fx:id="cardCount" layoutX="278.0" layoutY="568.0" styleClass="player1" text="69" />
       <Button id="load" fx:id="load" layoutX="624.0" layoutY="652.0" mnemonicParsing="false" onAction="#loadGame" text="Load" />
       <Button id="save" fx:id="save1" layoutX="704.0" layoutY="652.0" mnemonicParsing="false" onAction="#saveGame" text="save" />
+      <Button id="back" fx:id="back" layoutX="63.0" layoutY="619.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="36.0" prefWidth="124.0" text="Back" />
    </children>
 </AnchorPane>

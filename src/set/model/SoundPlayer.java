@@ -8,7 +8,7 @@ import javafx.scene.media.AudioClip;
  * This class provides sounds.
  * Every method will play a sound when called.
  * 
- * @author daniel
+ * @author Sebastian Neiss
  */
 public class SoundPlayer {
 

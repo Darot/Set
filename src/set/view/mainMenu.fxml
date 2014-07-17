@@ -10,6 +10,6 @@
    <children>
       <Button layoutX="575.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToConfiguration" prefHeight="36.0" prefWidth="124.0" text="Configuration" />
       <Button layoutX="575.0" layoutY="135.0" mnemonicParsing="false" onAction="#goToGame" prefHeight="36.0" prefWidth="124.0" text="Spielen" />
-      <Button layoutX="579.0" layoutY="342.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="124.0" text="Beenden" />
+      <Button layoutX="579.0" layoutY="342.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="36.0" prefWidth="124.0" text="Exit" />
    </children>
 </AnchorPane>

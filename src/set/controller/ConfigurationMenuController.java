@@ -86,6 +86,9 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
     Button addPlayer3;
     @FXML
     Button addPlayer4;
+    
+    @FXML
+    Button save;
 
     //the toggle group for color selection radio buttons
     final ToggleGroup group = new ToggleGroup();
@@ -193,13 +196,17 @@ public class ConfigurationMenuController implements Initializable, ControlledScr
                     if (symbols[i] == null) {
                         symbols[i] = symbol;
                         i = 3;
+                        //Only release the save button when 3 symbols picked
+                        if(!checkSymbolCount()){
+                            save.setDisable(false);
+                        }
                     }   
                 }
             }
         }
 
         else if (!btn.isSelected()) {
-            
+            save.setDisable(true);
             for (int i = 0; i < symbols.length; i++) {
                 System.out.println("no selected");
                     if(symbols[i] == null){

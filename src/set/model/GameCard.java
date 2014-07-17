@@ -11,7 +11,7 @@ import interfaces.model.Cards;
 /**
  * This is the card model it contains all information about a card.
  * 
- * @author Sebastian Neiss / Daniel Roth
+ * @author Sebastian Neiss 
  */
 public class GameCard implements Cards {
 
