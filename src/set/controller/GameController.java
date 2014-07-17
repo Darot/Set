@@ -255,7 +255,12 @@ public class GameController implements Initializable, ControlledScreen {
         soundPlayer.playCardSound();
         cardCount.setText("" + game.getCardCount());
         
-        System.out.println(config.getCPU());
+        //Set playerpoints (when loading)
+        for(int i=0; i < 4; i++){
+            Label label = (Label) controller.lookup("#player" + i + "Points");
+            label.setText("" +players[i].getPoints());
+        }
+        
         if(config.getCPU().equals("true")){
             
             
