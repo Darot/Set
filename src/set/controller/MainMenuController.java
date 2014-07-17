@@ -4,6 +4,7 @@ package set.controller;
 import interfaces.controller.ControlledScreen;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import set.Set;
@@ -47,7 +48,7 @@ public class MainMenuController implements Initializable, ControlledScreen {
     
     @Override
     public void exitGame(){
-        System.out.println("not implemented yet!");
+        Platform.exit();
     }
 
 }
